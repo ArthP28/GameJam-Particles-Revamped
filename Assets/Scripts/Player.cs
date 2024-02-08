@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpSpeed = 10f;
 
     bool isAlive = true;
+    bool isFacingRight = true;
+    bool antiGravEnabled = false;
     Rigidbody2D _rigidbody;
 
     // Start is called before the first frame update
@@ -42,29 +44,32 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        //float control = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
         {
-            /*if (_rigidbody.gravityScale > 0)
-            {
-                _rigidbody.gravityScale = -1;
-            }
-            else
-            {
-                _rigidbody.gravityScale = 1;
-            }*/
             _rigidbody.gravityScale = _rigidbody.gravityScale * -1;
         }
     }
 
     void FlipSprite()
     {
-        bool hasHorizontalSpeed = (Mathf.Abs(_rigidbody.velocity.x) > Mathf.Epsilon);
-        //bool hasVerticalSpeed = (Mathf.Abs(_rigidbody.velocity.y) > Mathf.Epsilon);
-
-        if (hasHorizontalSpeed)
+        if (_rigidbody.gravityScale < 0 && !antiGravEnabled)
         {
-            transform.localScale = new Vector2(Mathf.Sign(_rigidbody.velocity.x), 1f);
+            antiGravEnabled = true;
+            transform.Rotate(180f, 0f, 0f);
+        } else if (_rigidbody.gravityScale > 0 && antiGravEnabled)
+        {
+            antiGravEnabled = false;
+            transform.Rotate(180f, 0f, 0f);
+        }
+        if (_rigidbody.velocity.x > 0 && !isFacingRight)
+        {
+            isFacingRight = true;
+            //transform.localScale = new Vector2(Mathf.Sign(_rigidbody.velocity.x), 1f);
+            transform.Rotate(0f, 180f, 0f);
+        }else if (_rigidbody.velocity.x < 0 && isFacingRight)
+        {
+            isFacingRight = false;
+            transform.Rotate(0f, 180f, 0f);
         }
     }
 }
