@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5481992346871084072}
   - component: {fileID: 5481992346871084073}
   m_Layer: 0
-  m_Name: AntigravEffect
+  m_Name: P1AntigravEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
