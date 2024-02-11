@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] Transform firePoint; // Source of laser being fired
     [SerializeField] int damage = 20; // Amount of damage dealt to targets/enemies
+    [SerializeField] float range = 20; // How far the laser goes
     [SerializeField] LineRenderer lineRenderer; // Actual Laser
     [Tooltip("Element 0: Default Impact - Used when player shoots a wall\n" +
         "Element 1: Damage Impact - Explosion is colored to the player's laser when hitting something that takes in damage")]
@@ -15,8 +16,10 @@ public class Weapon : MonoBehaviour
 
     AudioSource m_AudioSource; // Required for Sound to work
     [SerializeField] AudioClip shootingSound; // Laser Sound
-
     //[SerializeField] GameObject bullet; // Used for bullet effect (unused)
+
+    [SerializeField] float timeBeforeNextFire = 1f;
+    bool alreadyFired = false;
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !alreadyFired)
         {
             StartCoroutine(Shoot()); // Begin shooting as soon as the fire button is pressed
         }
@@ -40,8 +43,10 @@ public class Weapon : MonoBehaviour
         m_AudioSource.Stop();
         m_AudioSource.PlayOneShot(shootingSound);
 
+        alreadyFired = true;
+
         // A Laser raycast is fired out from the player's firepoint
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right);
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right, range);
 
         if (hit) // When the laser hits something
         {
@@ -65,7 +70,7 @@ public class Weapon : MonoBehaviour
         else // When it misses any object
         {
             lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, firePoint.position + firePoint.right * 100);
+            lineRenderer.SetPosition(1, firePoint.position + firePoint.right * range);
         }
 
         // Laser appears for a fraction of a second before disappearing again
@@ -74,6 +79,9 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(0.035f);
 
         lineRenderer.enabled = false;
+
+        yield return new WaitForSeconds(timeBeforeNextFire);
+        alreadyFired = false;
 
 
     }

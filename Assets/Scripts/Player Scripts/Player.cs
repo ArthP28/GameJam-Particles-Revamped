@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,14 +13,17 @@ public class Player : MonoBehaviour
 
     Health _health;
     Rigidbody2D _rigidbody; // Used to check collisions and physics
+    Animator _anim;
 
     bool isAlive = true; // If the player has any health left
     bool isFacingRight = true;
+    bool isGrounded = true;
     bool antiGravEnabled = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        _anim = GetComponentInChildren<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _health = GetComponent<Health>();
     }
@@ -33,6 +37,10 @@ public class Player : MonoBehaviour
             Jump(); // Flips gravity
             FlipSprite(); // Change sprite to face in the direction of input movement
             //Die();
+
+            // Animation Methods
+            Fire();
+            TakeDamage();
         }
     }
 
@@ -41,6 +49,13 @@ public class Player : MonoBehaviour
         float control = Input.GetAxis("Horizontal");
         Vector2 playerVelocity = new Vector2(control * moveSpeed, _rigidbody.velocity.y);
         _rigidbody.velocity = playerVelocity;
+        if(Mathf.Abs(playerVelocity.x) > 0 && _anim.GetBool("OnGround"))
+        {
+            _anim.SetFloat("PlayerSpeed", 1);
+        } else
+        {
+            _anim.SetFloat("PlayerSpeed", 0);
+        }
     }
 
     void Jump()
@@ -48,6 +63,9 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             _rigidbody.gravityScale = _rigidbody.gravityScale * -1;
+
+            // Check if player is off the ground, then activate the animation for it
+
             if(_rigidbody.gravityScale < 0)
             {
                 antiGravEffect.Play(); // Antigravity is enabled
@@ -78,6 +96,29 @@ public class Player : MonoBehaviour
             isFacingRight = false;
             transform.Rotate(0f, 180f, 0f);
         }
+    }
+
+    void Fire()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (Mathf.Abs(_rigidbody.velocity.x) > 0 && _anim.GetBool("OnGround")) // Player is moving and grounded
+            {
+                _anim.SetTrigger("ShootOnWalk");
+            }
+            else if (_anim.GetBool("OnGround")) // Player is NOT moving and grounded
+            {
+                _anim.SetTrigger("Shoot");
+            } 
+            else // Player is up in the air
+            {
+                _anim.SetTrigger("ShootOnAir");
+            }
+        }
+    }
+    void TakeDamage()
+    {
+        //throw new NotImplementedException();
     }
 }
 
