@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player2Weapon : MonoBehaviour, PlayerControls.IPlayer2WeaponActions
+public class Player2Weapon : MonoBehaviour
 {
-    PlayerControls _weaponControls;
-    public event Action ShootEvent;
-
     [SerializeField] Transform firePoint; // Source of laser being fired
     [SerializeField] int damage = 10; // Amount of damage dealt to targets/enemies
     [SerializeField] float range = 16; // How far the laser goes
@@ -26,17 +23,6 @@ public class Player2Weapon : MonoBehaviour, PlayerControls.IPlayer2WeaponActions
     void Start()
     {
         m_AudioSource = GetComponent<AudioSource>();
-        _weaponControls = new PlayerControls();
-        _weaponControls.Player2Weapon.SetCallbacks(this);
-        _weaponControls.Player2Weapon.Enable();
-
-        ShootEvent += Fire;
-    }
-
-    void OnDestroy()
-    {
-        _weaponControls.Disable();
-        ShootEvent -= Fire;
     }
 
     // Update is called once per frame
@@ -48,7 +34,7 @@ public class Player2Weapon : MonoBehaviour, PlayerControls.IPlayer2WeaponActions
         }
     }*/
 
-    void Fire()
+    public void Fire()
     {
         if (!alreadyFired)
         {
@@ -106,10 +92,5 @@ public class Player2Weapon : MonoBehaviour, PlayerControls.IPlayer2WeaponActions
         alreadyFired = false;
 
 
-    }
-
-    public void OnFire1(InputAction.CallbackContext context)
-    {
-        ShootEvent?.Invoke();
     }
 }

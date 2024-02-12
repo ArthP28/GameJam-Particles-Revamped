@@ -9,13 +9,21 @@ public class Player1Movement : MonoBehaviour, PlayerControls.IPlayer1Actions
     public Vector2 MovementValue { get; private set; }
     PlayerControls _controls;
     public event Action JumpEvent;
+    public event Action ShootEvent;
 
     [SerializeField] float moveSpeed = 20f; // How fast the player moves
     [SerializeField] ParticleSystem antiGravEffect;
+    [Tooltip("Index 0: Death by Opposing Player\nIndex 1: Self-Destruct (Accidental Death)")]
+    [SerializeField] GameObject[] DeathExplosions = new GameObject[2];
 
+    SpriteRenderer _playerSprite;
     Health _health;
     Rigidbody2D _rigidbody; // Used to check collisions and physics
     Animator _anim;
+    Vector2 _spawnPoint;
+    Player1Weapon _weapon;
+    BoxCollider2D _collider;
+    float currentGravityForce;
 
     bool isAlive = true; // If the player has any health left
     bool isFacingRight = true;
@@ -29,17 +37,24 @@ public class Player1Movement : MonoBehaviour, PlayerControls.IPlayer1Actions
         _controls.Player1.SetCallbacks(this);
         _controls.Player1.Enable();
 
+        _playerSprite = GetComponentInChildren<SpriteRenderer>();
+        _weapon = GetComponent<Player1Weapon>();
+        _spawnPoint = transform.position;
         _anim = GetComponentInChildren<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _health = GetComponent<Health>();
         antiGravEffect = GetComponentInChildren<ParticleSystem>();
+        _collider = GetComponent<BoxCollider2D>();
+        currentGravityForce = _rigidbody.gravityScale;
         JumpEvent += Jump;
+        ShootEvent += Shoot;
     }
 
     void OnDestroy()
     {
         _controls.Disable();
         JumpEvent -= Jump;
+        ShootEvent -= Shoot;
     }
 
     // Update is called once per frame
@@ -47,12 +62,12 @@ public class Player1Movement : MonoBehaviour, PlayerControls.IPlayer1Actions
     {
         Move();
         FlipSprite();
+        Die();
     }
 
     void Move()
     {
         //float control = Input.GetAxis("Horizontal");
-        Debug.Log(MovementValue);
         Vector2 playerVelocity = new Vector2(MovementValue.x * moveSpeed, _rigidbody.velocity.y);
         _rigidbody.velocity = playerVelocity;
         if (Mathf.Abs(playerVelocity.x) > 0 && _anim.GetBool("OnGround"))
@@ -80,6 +95,10 @@ public class Player1Movement : MonoBehaviour, PlayerControls.IPlayer1Actions
             antiGravEffect.Stop(); // Antigravity is disabled
         }
     }
+    void Shoot()
+    {
+        _weapon.Fire();
+    }
 
     void FlipSprite()
     {
@@ -105,6 +124,37 @@ public class Player1Movement : MonoBehaviour, PlayerControls.IPlayer1Actions
         }
     }
 
+    void Die()
+    {
+        if(_health.GetCurrentHealth() <= 0 && isAlive)
+        {
+            Debug.Log("Player 1 Dead");
+            isAlive = false;
+            antiGravEffect.Stop();
+            _playerSprite.gameObject.SetActive(false);
+            Instantiate(DeathExplosions[0], transform.position, Quaternion.identity);
+            _rigidbody.gravityScale = 0;
+            _rigidbody.velocity = Vector2.zero;
+            _collider.enabled = false;
+            OnDestroy();
+            //StartCoroutine(WaitAndRespawn());
+        }
+    }
+
+    public IEnumerator WaitAndRespawn()
+    {
+        yield return new WaitForSeconds(3f);
+        isAlive = true;
+        _playerSprite.gameObject.SetActive(true);
+        _rigidbody.gravityScale = currentGravityForce;
+        _collider.enabled = true;
+        transform.position = _spawnPoint;
+        _health.ResetHealth();
+        _controls.Player1.Enable();
+        JumpEvent += Jump;
+        ShootEvent += Shoot;
+    }
+
     public void OnJump(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
@@ -114,5 +164,11 @@ public class Player1Movement : MonoBehaviour, PlayerControls.IPlayer1Actions
     public void OnMove(InputAction.CallbackContext context)
     {
         MovementValue = context.ReadValue<Vector2>();
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+        ShootEvent?.Invoke();
     }
 }

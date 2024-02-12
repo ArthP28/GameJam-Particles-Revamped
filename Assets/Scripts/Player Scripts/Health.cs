@@ -31,4 +31,9 @@ public class Health : MonoBehaviour
     {
         return _health;
     }
+
+    public void ResetHealth()
+    {
+        _health = _maxHealth;
+    }
 }

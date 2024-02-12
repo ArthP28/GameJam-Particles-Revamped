@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "289cc2a1-9714-43d8-8239-cab556c71246",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -68,6 +77,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "5f5dfb7d-56a9-4dfd-bfe4-7282a3da8857",
+                    "path": "<Keyboard>/comma",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -92,6 +112,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "e0d08b45-ae41-4729-a5d1-0207db0f2f71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -138,60 +167,15 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Player1Weapon",
-            "id": "3abf7bbe-fadd-40fd-86ec-36e29bf94f42",
-            "actions": [
-                {
-                    "name": "Fire1",
-                    "type": "Button",
-                    "id": "2be974bc-4b87-4f79-ae85-1b5715e100bb",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "f61bbe0d-0f7a-4191-9b4d-3adbc80c54da",
-                    "path": "<Keyboard>/comma",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Player2Weapon",
-            "id": "8c45f0e8-9a2e-4e3b-8237-c1e41cdd0ce0",
-            "actions": [
-                {
-                    "name": "Fire1",
-                    "type": "Button",
-                    "id": "b6b938bd-c7b9-4dab-b0bf-a29a303d4aa2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "b92f0a7b-6534-43d0-899d-1a83dc7e0d16",
+                    "id": "b3179a61-0c90-472f-bfc2-5a70aac39b47",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Fire1",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
