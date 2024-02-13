@@ -27,7 +27,6 @@ public class Player2Movement : MonoBehaviour, PlayerControls.IPlayer2Actions
 
     bool isAlive = true; // If the player has any health left
     bool isFacingRight = true;
-    bool isGrounded = true;
     bool antiGravEnabled = false;
 
     // Start is called before the first frame update
@@ -63,6 +62,8 @@ public class Player2Movement : MonoBehaviour, PlayerControls.IPlayer2Actions
         Move();
         FlipSprite();
         Die();
+        IsGrounded();
+        // Also check if player is grounded
     }
 
     void Move()
@@ -99,6 +100,7 @@ public class Player2Movement : MonoBehaviour, PlayerControls.IPlayer2Actions
     }
     void Shoot()
     {
+        _anim.SetTrigger("Shoot");
         _weapon.Fire();
     }
 
@@ -156,6 +158,34 @@ public class Player2Movement : MonoBehaviour, PlayerControls.IPlayer2Actions
         ShootEvent += Shoot;
     }
 
+    bool IsGrounded()
+    {
+        if (_rigidbody.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            _anim.SetBool("OnGround", true);
+            return true;
+        }
+        else
+        {
+            _anim.SetBool("OnGround", false);
+            return false;
+        }
+    }
+
+    public void ChangeControlState(bool newState)
+    {
+        if (!newState)
+        {
+            OnDestroy();
+        }
+        else
+        {
+            _controls.Player2.Enable();
+            JumpEvent += Jump;
+            ShootEvent += Shoot;
+        }
+    }
+
     public void OnJump(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
@@ -171,5 +201,9 @@ public class Player2Movement : MonoBehaviour, PlayerControls.IPlayer2Actions
     {
         if (!context.performed) { return; }
         ShootEvent?.Invoke();
+    }
+    public Animator GetAnimations()
+    {
+        return _anim;
     }
 }

@@ -16,6 +16,14 @@ public class Health : MonoBehaviour
     {
         Debug.Log("Health before damage: " + _health + " | Health AFTER damage: " + (_health - damage));
         _health -= damage;
+        if (gameObject.GetComponent<Player1Movement>())
+        {
+            gameObject.GetComponent<Player1Movement>().GetAnimations().SetTrigger("Hurt");
+        }
+        if (gameObject.GetComponent<Player2Movement>())
+        {
+            gameObject.GetComponent<Player2Movement>().GetAnimations().SetTrigger("Hurt");
+        }
     }
 
     public void RestoreHealth(int healthRestored) // Adds health

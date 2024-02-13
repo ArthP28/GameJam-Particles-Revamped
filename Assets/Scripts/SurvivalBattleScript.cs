@@ -8,6 +8,8 @@ public class SurvivalBattleScript : MonoBehaviour
     [SerializeField] LivesSystem Player2Lives;
 
     bool _gameOver = false;
+    bool _player1Wins = false;
+    bool _player2Wins = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +26,23 @@ public class SurvivalBattleScript : MonoBehaviour
             {
                 Debug.Log("Player 2 Wins!");
                 _gameOver = true;
+                _player2Wins=true;
             } else if (Player2Lives.GetCurrentLives() <= 0)
             {
                 Debug.Log("Player 1 Wins!");
                 _gameOver = true;
+                _player1Wins=true;
             }
         }
+    }
+
+    public bool Player1Won()
+    {
+        return _player1Wins;
+    }
+
+    public bool Player2Won()
+    {
+        return _player2Wins;
     }
 }

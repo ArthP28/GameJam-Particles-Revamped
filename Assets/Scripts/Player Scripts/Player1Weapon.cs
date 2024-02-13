@@ -7,16 +7,14 @@ using UnityEngine.InputSystem;
 public class Player1Weapon : MonoBehaviour
 {
     [SerializeField] Transform firePoint; // Source of laser being fired
-    [SerializeField] int damage = 10; // Amount of damage dealt to targets/enemies
-    [SerializeField] float range = 16; // How far the laser goes
-    [SerializeField] LineRenderer lineRenderer; // Actual Laser
-    [Tooltip("Element 0: Default Impact - Used when player shoots a wall\n" +
-        "Element 1: Damage Impact - Explosion is colored to the player's laser when hitting something that takes in damage")]
-    [SerializeField] GameObject[] impactEffects = new GameObject[2];
+    //[SerializeField] int damage = 10; // Amount of damage dealt to targets/enemies
+    //[SerializeField] float range = 16; // How far the laser goes
+    //[SerializeField] LineRenderer lineRenderer; // Actual Laser
+    //[SerializeField] GameObject[] impactEffects = new GameObject[2];
 
     AudioSource m_AudioSource; // Required for Sound to work
     [SerializeField] AudioClip shootingSound; // Laser Sound
-    //[SerializeField] GameObject bullet; // Used for bullet effect (unused)
+    [SerializeField] GameObject bullet; // Used for bullet effect (unused)
 
     [SerializeField] float timeBeforeNextFire = 0.07f;
     bool alreadyFired = false;
@@ -43,7 +41,7 @@ public class Player1Weapon : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        //Instantiate(bullet, firePoint.position, firePoint.rotation); // Used for bullet effect (unused)
+        Instantiate(bullet, firePoint.position, firePoint.rotation); // Used for bullet effect (unused)
 
         // Plays Bullet Sound
         m_AudioSource.Stop();
@@ -51,7 +49,7 @@ public class Player1Weapon : MonoBehaviour
 
         alreadyFired = true;
 
-        // A Laser raycast is fired out from the player's firepoint
+        /*// A Laser raycast is fired out from the player's firepoint
         RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right, range);
 
         if (hit) // When the laser hits something
@@ -84,7 +82,7 @@ public class Player1Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(0.035f);
 
-        lineRenderer.enabled = false;
+        lineRenderer.enabled = false;*/
 
         yield return new WaitForSeconds(timeBeforeNextFire);
         alreadyFired = false;
