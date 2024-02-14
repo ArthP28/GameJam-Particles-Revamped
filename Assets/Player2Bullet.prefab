@@ -120,7 +120,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.75
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4816,10 +4816,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   damage: 10
-  bulletDuration: 1
+  bulletDuration: 0.75
   impactEffects:
   - {fileID: 8970262820225571662, guid: fd8dc9a342c73f74a8e3713221c0c23d, type: 3}
   - {fileID: 8970262820225571662, guid: 60bdb3953392f1a48a4bbd55964d7f49, type: 3}
+  mainCollider: {fileID: 8114197833459764410}
 --- !u!199 &5427188578526294536
 ParticleSystemRenderer:
   serializedVersion: 6

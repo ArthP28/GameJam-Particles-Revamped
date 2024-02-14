@@ -70056,7 +70056,7 @@ AudioSource:
   m_Volume: 0.74
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -72856,7 +72856,7 @@ PrefabInstance:
     - target: {fileID: 531333995, guid: d6e3f0b8b8c2f5a458d4a8e846863624, type: 3}
       propertyPath: bullet
       value: 
-      objectReference: {fileID: 8845850418500688505, guid: 3fc03d04a9f61ae42abded5565943818, type: 3}
+      objectReference: {fileID: 5427188578526294537, guid: bba7de1dc9c1235479d91fd3a89b33b0, type: 3}
     - target: {fileID: 6825909421353711754, guid: d6e3f0b8b8c2f5a458d4a8e846863624, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -72970,6 +72970,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 3534151979722299085, guid: 67923376067232940bc6f9aa0bb8168b, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 5427188578526294537, guid: c87d0d6c89403fe499ab88c2bfcba946, type: 3}
     - target: {fileID: 8048307417025005380, guid: 67923376067232940bc6f9aa0bb8168b, type: 3}
       propertyPath: DeathExplosions.Array.size
       value: 2

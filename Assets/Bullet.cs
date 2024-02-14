@@ -22,15 +22,16 @@ public class Bullet : MonoBehaviour
         StartCoroutine(BulletLife());
     }
 
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (rb.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             float randVelocityIndex = Random.Range(-72.5f, 72.5f);
-            if(randVelocityIndex >= -25f && randVelocityIndex <= 0)
+            if (randVelocityIndex >= -25f && randVelocityIndex <= 0)
             {
                 randVelocityIndex -= 25f;
-            } else if (randVelocityIndex <= 25f)
+            }
+            else if (randVelocityIndex <= 25f)
             {
                 randVelocityIndex += 25f;
             }
