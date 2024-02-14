@@ -14,6 +14,7 @@ public class Player1Weapon : MonoBehaviour
 
     AudioSource m_AudioSource; // Required for Sound to work
     [SerializeField] AudioClip shootingSound; // Laser Sound
+    [SerializeField] AudioClip shootingSound2; // Laser Sound
     [SerializeField] GameObject bullet; // Used for bullet effect (unused)
 
     [SerializeField] float timeBeforeNextFire = 0.07f;
@@ -46,6 +47,7 @@ public class Player1Weapon : MonoBehaviour
         // Plays Bullet Sound
         m_AudioSource.Stop();
         m_AudioSource.PlayOneShot(shootingSound);
+        m_AudioSource.PlayOneShot(shootingSound2);
 
         alreadyFired = true;
 

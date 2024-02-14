@@ -204,7 +204,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6825909421353711758}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 02d52640e02a27443b0fa48fa93209f2, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -379,6 +379,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   antiGravEffect: {fileID: 8368642150529816993}
+  DeathExplosions:
+  - {fileID: 8970262820225571662, guid: 078506e8bd8796e47a923d6f2682cd67, type: 3}
+  - {fileID: 8970262820225571662, guid: 2a63d73652990d74a9b050648742c088, type: 3}
 --- !u!114 &531333995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,13 +395,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 6825909421673811379}
-  damage: 10
-  range: 16
-  lineRenderer: {fileID: 6825909420942557502}
-  impactEffects:
-  - {fileID: 8970262820225571662, guid: fd8dc9a342c73f74a8e3713221c0c23d, type: 3}
-  - {fileID: 8970262820225571662, guid: 493cb4283e97a1e46a5047102e2eeb5b, type: 3}
   shootingSound: {fileID: 8300000, guid: 0b204d622221e7343ae5fc076c570f60, type: 3}
+  shootingSound2: {fileID: 8300000, guid: 7071acd4c224b834384511a17f096930, type: 3}
+  bullet: {fileID: 5427188578526294537, guid: bba7de1dc9c1235479d91fd3a89b33b0, type: 3}
   timeBeforeNextFire: 0.07
 --- !u!1 &6825909421673811380
 GameObject:

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3534151979288871697}
   - component: {fileID: 3534151979288871698}
   m_Layer: 0
-  m_Name: Player1Sprite
+  m_Name: Player2Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,8 +58,8 @@ Transform:
   m_GameObject: {fileID: 3534151979288871699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.07, y: -0.27000004, z: 0}
-  m_LocalScale: {x: 2.5945, y: 2.5945, z: 2.5945}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.9999998, y: 2.9999998, z: 2.9999998}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3534151979722299074}
   m_RootOrder: 0
@@ -105,7 +105,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300008, guid: 6f5c6e1922389384cb1736af0690439b, type: 3}
+  m_Sprite: {fileID: 21300008, guid: 167b97299fe9ec04fb12392d64ea2e71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +126,7 @@ Animator:
   m_GameObject: {fileID: 3534151979288871699}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 20cf309f379870e4d910a3a032c51691, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7401227151ecb1e45bc4e7e3b5f20372, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -340,7 +340,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3534151979722299078}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 02d52640e02a27443b0fa48fa93209f2, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -515,6 +515,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   antiGravEffect: {fileID: 5481992346871084072, guid: 7bd5b546e0221474a81e6b7634645ac4, type: 3}
+  DeathExplosions:
+  - {fileID: 8970262820225571662, guid: d11d9382c1a8c7d449139b484af82ea4, type: 3}
+  - {fileID: 8970262820225571662, guid: 2a63d73652990d74a9b050648742c088, type: 3}
 --- !u!114 &3534151979722299085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,13 +531,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3534151978933085179}
-  damage: 10
-  range: 16
-  lineRenderer: {fileID: 3534151979579666294}
-  impactEffects:
-  - {fileID: 8970262820225571662, guid: fd8dc9a342c73f74a8e3713221c0c23d, type: 3}
-  - {fileID: 8970262820225571662, guid: 60bdb3953392f1a48a4bbd55964d7f49, type: 3}
   shootingSound: {fileID: 8300000, guid: b85a0c491fa993f4ab4bc06fab87a584, type: 3}
+  shootingSound2: {fileID: 8300000, guid: 7071acd4c224b834384511a17f096930, type: 3}
+  bullet: {fileID: 5427188578526294537, guid: c87d0d6c89403fe499ab88c2bfcba946, type: 3}
   timeBeforeNextFire: 0.07
 --- !u!1001 &8048307417781448328
 PrefabInstance:
