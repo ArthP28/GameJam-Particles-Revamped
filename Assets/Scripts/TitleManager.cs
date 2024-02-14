@@ -25,4 +25,10 @@ public class TitleManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void QuitGame()
+    {
+        Debug.Log("Game Exited");
+        Application.Quit();
+    }
+
 }
