@@ -34,7 +34,7 @@ public class Player2Bullet : Bullet
     IEnumerator PassThrough()
     {
         mainCollider.enabled = false;
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(0.05f);
         mainCollider.enabled = true;
     }
 }

@@ -37,12 +37,12 @@ public class Player1Movement : MonoBehaviour, PlayerControls.IPlayer1Actions
         _controls.Player1.Enable();
 
         _playerSprite = GetComponentInChildren<SpriteRenderer>();
+        antiGravEffect.Stop();
         _weapon = GetComponent<Player1Weapon>();
         _spawnPoint = transform.position;
         _anim = GetComponentInChildren<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _health = GetComponent<Health>();
-        antiGravEffect = GetComponentInChildren<ParticleSystem>();
         _collider = GetComponent<BoxCollider2D>();
         currentGravityForce = _rigidbody.gravityScale;
         JumpEvent += Jump;

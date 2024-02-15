@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     [Tooltip("Element 0: Default Impact - Used when player shoots a wall\n" +
         "Element 1: Damage Impact - Explosion is colored to the player's laser when hitting something that takes in damage")]
     [SerializeField] GameObject[] impactEffects = new GameObject[2];
+    [SerializeField] float MaxAngle = 72.5f;
+    [SerializeField] float MinAngle = 25f;
     Rigidbody2D rb;
     void Awake()
     {
@@ -26,14 +28,14 @@ public class Bullet : MonoBehaviour
     {
         if (rb.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
-            float randVelocityIndex = Random.Range(-72.5f, 72.5f);
-            if (randVelocityIndex >= -25f && randVelocityIndex <= 0)
+            float randVelocityIndex = Random.Range(-MaxAngle, MaxAngle);
+            if (randVelocityIndex >= -MinAngle && randVelocityIndex <= 0)
             {
-                randVelocityIndex -= 25f;
+                randVelocityIndex -= MinAngle;
             }
-            else if (randVelocityIndex <= 25f)
+            else if (randVelocityIndex <= MinAngle)
             {
-                randVelocityIndex += 25f;
+                randVelocityIndex += MinAngle;
             }
             rb.velocity = new Vector2(rb.velocity.x, randVelocityIndex);
         }
@@ -58,5 +60,15 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(bulletDuration);
         Destroy(gameObject);
+    }
+
+    public float GetDuration()
+    {
+        return bulletDuration;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
     }
 }

@@ -14,14 +14,19 @@ public class Player2Weapon : MonoBehaviour
 
     AudioSource m_AudioSource; // Required for Sound to work
     [SerializeField] AudioClip shootingSound; // Laser Sound
-    [SerializeField] AudioClip shootingSound2; // Laser Sound
+    [SerializeField] AudioClip gainPowerSound;
+    [SerializeField] AudioClip losePowerSound;
     [SerializeField] GameObject bullet; // Used for bullet effect (unused)
+    GameObject Reservebullet; // Used for bullet effect
 
     [SerializeField] float timeBeforeNextFire = 0.07f;
+    float reserveTime;
     bool alreadyFired = false;
     void Start()
     {
         m_AudioSource = GetComponent<AudioSource>();
+        Reservebullet = bullet;
+        reserveTime = timeBeforeNextFire;
     }
 
     // Update is called once per frame
@@ -40,6 +45,21 @@ public class Player2Weapon : MonoBehaviour
             StartCoroutine(Shoot()); // Begin shooting as soon as the fire button is pressed
         }
     }
+    public void UpgradeWeapon(GameObject newBullet, float newTime, string PowerName)
+    {
+        m_AudioSource.PlayOneShot(gainPowerSound);
+        bullet = newBullet;
+        timeBeforeNextFire = newTime;
+        StartCoroutine(PowerUpDuration());
+    }
+
+    IEnumerator PowerUpDuration()
+    {
+        yield return new WaitForSeconds(15f);
+        m_AudioSource.PlayOneShot(losePowerSound);
+        bullet = Reservebullet;
+        timeBeforeNextFire = reserveTime;
+    }
 
     IEnumerator Shoot()
     {
@@ -48,7 +68,6 @@ public class Player2Weapon : MonoBehaviour
         // Plays Bullet Sound
         m_AudioSource.Stop();
         m_AudioSource.PlayOneShot(shootingSound);
-        m_AudioSource.PlayOneShot(shootingSound2);
 
         alreadyFired = true;
 

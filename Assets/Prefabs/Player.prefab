@@ -143,8 +143,6 @@ GameObject:
   - component: {fileID: 6825909421353711755}
   - component: {fileID: 6825909421353711756}
   - component: {fileID: 6825909421353711767}
-  - component: {fileID: 6825909421353711757}
-  - component: {fileID: 6825909421353711753}
   - component: {fileID: 6825909421353711752}
   - component: {fileID: 531333994}
   - component: {fileID: 531333995}
@@ -234,41 +232,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
---- !u!114 &6825909421353711757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6825909421353711758}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 276d3e7dfd73566439a543f2438f1f89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 16
-  antiGravEffect: {fileID: 0}
---- !u!114 &6825909421353711753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6825909421353711758}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cbba7cb1931ed54d942f6ba39e30dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 6825909421673811379}
-  damage: 10
-  range: 16
-  lineRenderer: {fileID: 6825909420942557502}
-  impactEffects:
-  - {fileID: 8970262820225571662, guid: fd8dc9a342c73f74a8e3713221c0c23d, type: 3}
-  - {fileID: 8970262820225571662, guid: 493cb4283e97a1e46a5047102e2eeb5b, type: 3}
-  shootingSound: {fileID: 8300000, guid: 0b204d622221e7343ae5fc076c570f60, type: 3}
-  timeBeforeNextFire: 0.07
 --- !u!82 &6825909421353711752
 AudioSource:
   m_ObjectHideFlags: 0
@@ -396,8 +359,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 6825909421673811379}
   shootingSound: {fileID: 8300000, guid: 0b204d622221e7343ae5fc076c570f60, type: 3}
-  shootingSound2: {fileID: 8300000, guid: 7071acd4c224b834384511a17f096930, type: 3}
+  gainPowerSound: {fileID: 8300000, guid: ef58c50e832805d4ebc4a0adb74b54e4, type: 3}
+  losePowerSound: {fileID: 8300000, guid: 4829df529391da1418b48874d667d0bb, type: 3}
   bullet: {fileID: 5427188578526294537, guid: bba7de1dc9c1235479d91fd3a89b33b0, type: 3}
+  RapidGetEffect: {fileID: 5481992346871084072, guid: 82334d3d527458d468d4b8e4604528c4, type: 3}
+  BombGetEffect: {fileID: 5481992346871084072, guid: 0562a736159d2ba459478e495dd00b6c, type: 3}
+  LoseEffect: {fileID: 5481992346871084072, guid: 40de74e7a8c20fe4f9702b9c3ffdb5ab, type: 3}
   timeBeforeNextFire: 0.07
 --- !u!1 &6825909421673811380
 GameObject:
@@ -457,8 +424,8 @@ Transform:
   m_GameObject: {fileID: 6825909421853453659}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.07, y: -0.27000004, z: 0}
-  m_LocalScale: {x: 2.5945, y: 2.5945, z: 2.5945}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.9999998, y: 2.9999998, z: 2.9999998}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6825909421353711754}
   m_RootOrder: 0
@@ -589,6 +556,10 @@ PrefabInstance:
     - target: {fileID: 5481992346871084086, guid: f441556a7819ac6419394afc5822d7a8, type: 3}
       propertyPath: m_Name
       value: P1AntigravEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481992346871084086, guid: f441556a7819ac6419394afc5822d7a8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f441556a7819ac6419394afc5822d7a8, type: 3}

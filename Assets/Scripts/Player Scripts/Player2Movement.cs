@@ -42,7 +42,6 @@ public class Player2Movement : MonoBehaviour, PlayerControls.IPlayer2Actions
         _anim = GetComponentInChildren<Animator>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _health = GetComponent<Health>();
-        antiGravEffect = GetComponentInChildren<ParticleSystem>();
         _collider = GetComponent<BoxCollider2D>();
         currentGravityForce = _rigidbody.gravityScale;
         JumpEvent += Jump;
