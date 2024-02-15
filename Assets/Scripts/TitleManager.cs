@@ -5,23 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
+
+    [SerializeField] GameObject LoadingScreen;
     public void GoToBattle()
     {
+        LoadingScreen.SetActive(true);
         SceneManager.LoadScene("Level1");
     }
 
     public void GoToHowToPlay()
     {
+        LoadingScreen.SetActive(true);
         SceneManager.LoadScene("HowToPlay");
     }
 
     public void GoToCredits()
     {
+        LoadingScreen.SetActive(true);
         SceneManager.LoadScene("Credits");
     }
 
     public void GoToTitle()
     {
+        LoadingScreen.SetActive(true);
         SceneManager.LoadScene("Menu");
     }
 

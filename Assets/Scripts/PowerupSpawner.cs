@@ -24,8 +24,9 @@ public class PowerupSpawner : MonoBehaviour
         {
             Debug.Log("Waiting");
             float randomInterval = Random.Range(minimumDuration, maximumDuration);
+            int randIndex = (int)Random.Range(0, _powerups.Length);
             yield return new WaitForSeconds(randomInterval);
-            Instantiate(_powerups[0], transform.position, transform.rotation);
+            Instantiate(_powerups[randIndex], transform.position, transform.rotation);
             RandomizePosition();
         }
         

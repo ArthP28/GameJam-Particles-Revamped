@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
 {
+    [SerializeField] GameObject LoadingScreen;
 
     SurvivalBattleScript SurvivalMode;
 
@@ -91,12 +92,14 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     public void RestartLevel()
     {
         Time.timeScale = 1f;
+        LoadingScreen.SetActive(true);
         SceneManager.LoadScene("Level1");
     }
 
     public void ReturnToMenu()
     {
         Time.timeScale = 1f;
+        LoadingScreen.SetActive(true);
         SceneManager.LoadScene("Menu");
     }
 
