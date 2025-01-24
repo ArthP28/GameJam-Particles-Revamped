@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Pool;
 
 [RequireComponent(typeof(BulletPool))]
@@ -116,6 +117,8 @@ public class Weapon : MonoBehaviour
                 _uiToAdd = ui;
             }
         }
+
+        Assert.IsNotNull( _uiToAdd, "Script has detected a null powerup UI. \nMake sure that each player UI is assigned to the correct player number.");
 
         return _uiToAdd;
     }

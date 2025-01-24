@@ -4056,7 +4056,7 @@ ParticleSystem:
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
-    generateLightingData: 1
+    generateLightingData: 0
     splitSubEmitterRibbons: 0
     attachRibbonsToTransform: 0
     colorOverLifetime:
@@ -4824,7 +4824,6 @@ MonoBehaviour:
   - {fileID: 8970262820225571662, guid: 493cb4283e97a1e46a5047102e2eeb5b, type: 3}
   MaxAngle: 72.5
   MinAngle: 25
-  timeBeforeNextCollision: 0.575
   _hitable:
     serializedVersion: 2
     m_Bits: 1536
@@ -4922,7 +4921,6 @@ MonoBehaviour:
   - {fileID: 8970262820225571662, guid: 493cb4283e97a1e46a5047102e2eeb5b, type: 3}
   MaxAngle: 72.5
   MinAngle: 25
-  timeBeforeNextCollision: 0.575
   _hitable:
     serializedVersion: 2
     m_Bits: 0

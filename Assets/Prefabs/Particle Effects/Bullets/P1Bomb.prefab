@@ -4054,7 +4054,7 @@ ParticleSystem:
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
-    generateLightingData: 1
+    generateLightingData: 0
     splitSubEmitterRibbons: 0
     attachRibbonsToTransform: 0
     colorOverLifetime:
@@ -5026,7 +5026,6 @@ MonoBehaviour:
   impactEffects: []
   MaxAngle: 10
   MinAngle: 5
-  timeBeforeNextCollision: 0.65
   _hitable:
     serializedVersion: 2
     m_Bits: 1537
