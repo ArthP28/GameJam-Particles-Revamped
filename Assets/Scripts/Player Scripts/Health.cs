@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] int _health = 50;
+    [SerializeField] int _health = 100;
     int _maxHealth; // Determines maximum amount of health that can be restored
 
     void Start()
@@ -16,13 +16,9 @@ public class Health : MonoBehaviour
     {
         Debug.Log("Health before damage: " + _health + " | Health AFTER damage: " + (_health - damage));
         _health -= damage;
-        if (gameObject.GetComponent<Player1Movement>())
+        if (gameObject.GetComponent<PlayerNew>())
         {
-            gameObject.GetComponent<Player1Movement>().GetAnimations().SetTrigger("Hurt");
-        }
-        if (gameObject.GetComponent<Player2Movement>())
-        {
-            gameObject.GetComponent<Player2Movement>().GetAnimations().SetTrigger("Hurt");
+            gameObject.GetComponent<PlayerNew>().GetAnimations().SetTrigger("Hurt");
         }
     }
 

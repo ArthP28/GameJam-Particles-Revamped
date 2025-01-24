@@ -9751,10 +9751,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1273948165881350991}
   - component: {fileID: 7731795626279126820}
-  - component: {fileID: 2565948496384536597}
   - component: {fileID: 4238462943443151793}
   - component: {fileID: 7922618457415351165}
   - component: {fileID: 8872617327863783075}
+  - component: {fileID: 5091159313677695854}
+  - component: {fileID: 8220112069259705963}
   m_Layer: 0
   m_Name: P1Explosion
   m_TagString: Untagged
@@ -9787,7 +9788,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8970262820225571662}
   serializedVersion: 8
-  lengthInSec: 3
+  lengthInSec: 1.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -14544,20 +14545,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &2565948496384536597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8970262820225571662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dc0f9e14bf985d438fe5e009bc437cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 20
-  impactEffect: {fileID: 8970262820225571662, guid: 493cb4283e97a1e46a5047102e2eeb5b, type: 3}
 --- !u!199 &4238462943443151793
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -14742,3 +14729,42 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
+--- !u!50 &5091159313677695854
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970262820225571662}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &8220112069259705963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970262820225571662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2ff6fbca00d7c4d8ccfbb5f64c11ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitable:
+    serializedVersion: 2
+    m_Bits: 512
+  damage: 20
+  impactEffect: {fileID: 8970262820225571662, guid: 493cb4283e97a1e46a5047102e2eeb5b, type: 3}
+  ExplosionofPlayersBomb: 0

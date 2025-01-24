@@ -13,12 +13,11 @@ GameObject:
   - component: {fileID: 5427188578526294536}
   - component: {fileID: 5427188578526294540}
   - component: {fileID: 8114197833459764410}
-  - component: {fileID: 8882804903988533530}
   - component: {fileID: 1384284089517519278}
-  - component: {fileID: 2056562448863397406}
+  - component: {fileID: 1790974865797786539}
   m_Layer: 0
   m_Name: P2Bomb
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4913,22 +4912,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!58 &8882804903988533530
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5427188578526294537}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: dec3216f98ebf9040b28d997585387f0, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!82 &1384284089517519278
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5025,7 +5008,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2056562448863397406
+--- !u!114 &1790974865797786539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5034,7 +5017,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5427188578526294537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a26c95179e56048a10cc69765324f5, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf0175a040b8a4498970d5240c30c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
@@ -5045,5 +5028,9 @@ MonoBehaviour:
   - {fileID: 0}
   MaxAngle: 10
   MinAngle: 5
+  timeBeforeNextCollision: 0.65
+  _hitable:
+    serializedVersion: 2
+    m_Bits: 385
+  bulletOfPlayersWeapon: 1
   Explosion: {fileID: 8970262820225571662, guid: bb16dffe30b22314b91d4faf736e64a1, type: 3}
-  mainCollider: {fileID: 8882804903988533530}

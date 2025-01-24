@@ -16,7 +16,7 @@ public class Player1Bomb : Bullet
     IEnumerator TimeBeforeExplosion()
     {
         yield return new WaitForSeconds(GetComponent<Bullet>().GetDuration());
-        Instantiate(Explosion, transform.position, transform.rotation);
+        Instantiate(Explosion, transform);
         Destroy(gameObject);
     }
 
@@ -27,13 +27,13 @@ public class Player1Bomb : Bullet
         {
             if (collision.GetComponent<Player2Movement>())
             {
-                Instantiate(Explosion, transform.position, transform.rotation);
+                Instantiate(Explosion, transform);
                 Destroy(gameObject);
                 hasCollided = true;
             }
             else if (collision.GetComponent<Player2Bullet>())
             {
-                Instantiate(Explosion, transform.position, transform.rotation);
+                Instantiate(Explosion, transform);
                 Destroy(gameObject);
                 //GetComponent<Bullet>().Miss();
                 hasCollided = true;

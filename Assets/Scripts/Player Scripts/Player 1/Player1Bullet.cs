@@ -13,7 +13,7 @@ public class Player1Bullet : Bullet
         {
             if (collision.GetComponent<Player2Movement>())
             {
-                GetComponent<Bullet>().DirectHit();
+                //GetComponent<Bullet>().DirectHit();
                 Destroy(gameObject);
                 collision.GetComponent<Player2Movement>().GetComponent<Health>().DealDamage(GetComponent<Bullet>().GetDamage());
                 hasCollided = true;
@@ -21,7 +21,7 @@ public class Player1Bullet : Bullet
             else if (collision.GetComponent<Player2Bullet>())
             {
                 Destroy(gameObject);
-                GetComponent<Bullet>().Miss();
+                //GetComponent<Bullet>().Miss();
                 hasCollided = true;
             }
             else if (collision.GetComponent<Player1Movement>() || collision.GetComponent<Bullet>())

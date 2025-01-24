@@ -10,15 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 5427188578526294538}
   - component: {fileID: 5427188578526294539}
-  - component: {fileID: 7416183507421890632}
+  - component: {fileID: 7043721860308946281}
   - component: {fileID: 5427188578526294536}
   - component: {fileID: 5427188578526294540}
   - component: {fileID: 8114197833459764410}
   - component: {fileID: 8882804903988533530}
   - component: {fileID: 1384284089517519278}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: P2NewBullet
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4803,7 +4803,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &7416183507421890632
+--- !u!114 &7043721860308946281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4812,10 +4812,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5427188578526294537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeaedf6cbc5366e4c87bc948f580fa96, type: 3}
+  m_Script: {fileID: 11500000, guid: 866f2977e22138544914bfac53789d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 75
+  speed: 50
   damage: 5
   bulletDuration: 1
   impactEffects:
@@ -4823,7 +4823,11 @@ MonoBehaviour:
   - {fileID: 8970262820225571662, guid: 60bdb3953392f1a48a4bbd55964d7f49, type: 3}
   MaxAngle: 72.5
   MinAngle: 25
-  mainCollider: {fileID: 8114197833459764410}
+  timeBeforeNextCollision: 0.575
+  _hitable:
+    serializedVersion: 2
+    m_Bits: 384
+  bulletOfPlayersWeapon: 1
 --- !u!199 &5427188578526294536
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -4916,7 +4920,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &8114197833459764410
 CircleCollider2D:

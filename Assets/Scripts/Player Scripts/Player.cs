@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     bool isAlive = true; // If the player has any health left
     bool isFacingRight = true;
-    bool isGrounded = true;
+    //bool isGrounded = true;
     bool antiGravEnabled = false;
 
     // Start is called before the first frame update

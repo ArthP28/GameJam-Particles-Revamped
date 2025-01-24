@@ -2,87 +2,121 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
+[RequireComponent(typeof(BulletPool))]
 public class Weapon : MonoBehaviour
 {
-
-    [SerializeField] Transform firePoint; // Source of laser being fired
-    [SerializeField] int damage = 20; // Amount of damage dealt to targets/enemies
-    [SerializeField] float range = 20; // How far the laser goes
-    [SerializeField] LineRenderer lineRenderer; // Actual Laser
-    [Tooltip("Element 0: Default Impact - Used when player shoots a wall\n" +
-        "Element 1: Damage Impact - Explosion is colored to the player's laser when hitting something that takes in damage")]
-    [SerializeField] GameObject[] impactEffects = new GameObject[2];
-
-    AudioSource m_AudioSource; // Required for Sound to work
+    // Serializeables
     [SerializeField] AudioClip shootingSound; // Laser Sound
-    //[SerializeField] GameObject bullet; // Used for bullet effect (unused)
+    [SerializeField] AudioClip gainPowerSound;
+    [SerializeField] AudioClip losePowerSound;
+    [SerializeField] float timeBeforeNextFire = 0.07f; // The next bullet is fired after a certain amount of time has passed
+    
+    Coroutine PowerUpRoutine; // The IEnumerator function that will play when the player obtains a powerup
+    Coroutine DisplayMessageRoutine;
+    AudioSource m_AudioSource; // Required for Sound to work
+    float reserveTime; // The original fire time is preserved in this variable while the powerup is still in effect
 
-    [SerializeField] float timeBeforeNextFire = 1f;
     bool alreadyFired = false;
+
+    BulletPool _bulletPool; // All bullets are handled in this object pool
+
+    PowerUpUI _playersPowerUpUI;
 
     private void Awake()
     {
-        m_AudioSource = GetComponent<AudioSource>();
+        _playersPowerUpUI = FindPowerUpUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if (Input.GetButtonDown("Fire1") && !alreadyFired)
+        Debug.Log(_playersPowerUpUI);
+        m_AudioSource = GetComponent<AudioSource>();
+        _bulletPool = GetComponent<BulletPool>();
+        reserveTime = timeBeforeNextFire;
+    }
+    public void Fire()
+    {
+        if (!alreadyFired) // If the bullet is already fired, then the player cannot shoot another one until time has passed
         {
             StartCoroutine(Shoot()); // Begin shooting as soon as the fire button is pressed
         }
     }
 
-    IEnumerator Shoot()
+    public void UpgradeWeapon(Bullet newBullet, float newTime, int powerDuration, string PowerName) // The player obtains the new weapon until either the powerup wears off or the player dies
     {
-        //Instantiate(bullet, firePoint.position, firePoint.rotation); // Used for bullet effect (unused)
+        m_AudioSource.PlayOneShot(gainPowerSound);
+        // The bullet and its firing time changes to the new powerup
+        _bulletPool.SwitchBullet(newBullet);
+        timeBeforeNextFire = newTime;
+
+        _playersPowerUpUI.ActivateTimer(powerDuration);
+
+        if (DisplayMessageRoutine != null)
+        {
+            StopCoroutine(DisplayMessageRoutine);
+        }
+        DisplayMessageRoutine = StartCoroutine(_playersPowerUpUI.DisplayMessage(PowerName));
+
+        // If a powerup is already in effect, restart the PowerUp Coroutine.
+        // This allows for the player's powerup to be kept without losing it too early
+        if (PowerUpRoutine != null) 
+        {
+            StopCoroutine(PowerUpRoutine);
+        }
+        PowerUpRoutine = StartCoroutine(PowerUpDuration(powerDuration));
+
+        // FUTURE: Use the PowerUp's name as part of a UI element displaying the power up's duration
+    }
+
+    IEnumerator PowerUpDuration(int powerUpTimeLimit)
+    {
+        yield return new WaitForSeconds(powerUpTimeLimit);
+        LoseUpgrade();
+    }
+
+    public void LoseUpgrade() // The player does not have the powerup anymore
+    {
+        if (_bulletPool.GetCurrentBullet() != _bulletPool.GetReserveBullet())
+        {
+            _playersPowerUpUI.DeActivateTimer();
+            _playersPowerUpUI.RemoveMessage();
+            m_AudioSource.PlayOneShot(losePowerSound);
+            _bulletPool.RevertToDefaultBullet();
+            timeBeforeNextFire = reserveTime;
+        }
+    }
+
+    IEnumerator Shoot() // Fire a bullet from the player's gun
+    {
+        Bullet _bullet = _bulletPool.GetPool().Get(); // Instead of creating a new bullet, pick one up from the pool
+        _bullet.SetPool(_bulletPool); // Make sure to set the bullet's pool so it knows where to return
 
         // Plays Bullet Sound
         m_AudioSource.Stop();
         m_AudioSource.PlayOneShot(shootingSound);
 
+        // Player must wait a certain amount of time before firing again
         alreadyFired = true;
-
-        // A Laser raycast is fired out from the player's firepoint
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right, range);
-
-        if (hit) // When the laser hits something
-        {
-            Debug.Log(hit.transform.name);
-
-            Health targetHealth = hit.transform.GetComponent<Health>();
-            if(targetHealth != null)
-            {
-                // Object takes damage if it has health
-                targetHealth.DealDamage(damage);
-                Instantiate(impactEffects[1], hit.point, Quaternion.identity); // Colored Explosion - Player hit
-            } else
-            {
-                Instantiate(impactEffects[0], hit.point, Quaternion.identity); // Default Explosion - Miss
-            }
-
-            // These two lines of code determines how far the laser travelled before hitting the object.
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, hit.point);
-        }
-        else // When it misses any object
-        {
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, firePoint.position + firePoint.right * range);
-        }
-
-        // Laser appears for a fraction of a second before disappearing again
-        lineRenderer.enabled = true;
-
-        yield return new WaitForSeconds(0.035f);
-
-        lineRenderer.enabled = false;
-
         yield return new WaitForSeconds(timeBeforeNextFire);
         alreadyFired = false;
 
 
+    }
+
+    PowerUpUI FindPowerUpUI()
+    {
+        PowerUpUI _uiToAdd = null;
+        PowerUpUI[] allUIs = FindObjectsOfType<PowerUpUI>();
+        foreach (PowerUpUI ui in allUIs)
+        {
+            if (ui.playerOfUI == GetComponent<PlayerInput>().playerNum)
+            {
+                _uiToAdd = ui;
+            }
+        }
+
+        return _uiToAdd;
     }
 }

@@ -197,7 +197,7 @@ public class Player1Movement : MonoBehaviour, PlayerControls.IPlayer1Actions
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (!context.performed) { return; }
+        if (!context.action.IsPressed()) { return; }
         ShootEvent?.Invoke();
     }
 

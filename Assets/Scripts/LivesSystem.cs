@@ -23,20 +23,16 @@ public class LivesSystem : MonoBehaviour
 
     void CheckLives()
     {
-        if (_health.GetCurrentHealth() <= 0 && !livesChanged)
+        if (_health.GetCurrentHealth() <= 0 && !livesChanged) // When a player dies, remove the last life in the list and subtract the number of lives by 1.
         {
             PlayerLives[numLives - 1].SetActive(false);
             numLives--;
             livesChanged = true;
             if(numLives > 0)
             {
-                if (_health.GetComponent<Player1Movement>())
+                if (_health.GetComponent<PlayerNew>())
                 {
-                    StartCoroutine(_health.GetComponent<Player1Movement>().WaitAndRespawn());
-                }
-                else if (_health.GetComponent<Player2Movement>())
-                {
-                    StartCoroutine(_health.GetComponent<Player2Movement>().WaitAndRespawn());
+                    StartCoroutine(_health.GetComponent<PlayerNew>().WaitAndRespawn());
                 }
             }
         }

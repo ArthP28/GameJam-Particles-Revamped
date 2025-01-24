@@ -18,8 +18,7 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
 
     [SerializeField] AudioSource _bgmMusic;
 
-    Player1Movement p1Controls;
-    Player2Movement p2Controls;
+    PlayerInput[] _allPlayers;
 
     UIControls _controls;
     public event Action Pause;
@@ -33,9 +32,7 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     void Start()
     {
         SurvivalMode = GetComponentInChildren<SurvivalBattleScript>();
-
-        p1Controls = FindObjectOfType<Player1Movement>();
-        p2Controls = FindObjectOfType<Player2Movement>();
+        _allPlayers = FindObjectsOfType<PlayerInput>();
 
         _controls = new UIControls();
         _controls.GeneralUI.SetCallbacks(this);
@@ -55,18 +52,15 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
         if(SurvivalMode.Player1Won() && SurvivalMode.Player2Won())
         {
             TieScreen.SetActive(true);
-            p1Controls.ChangeControlState(false);
-            p2Controls.ChangeControlState(false);
+            ToggleInput(false);
         } else if (SurvivalMode.Player1Won())
         {
             P1VictoryScreen.SetActive(true);
-            p1Controls.ChangeControlState(false);
-            p2Controls.ChangeControlState(false);
+            ToggleInput(false);
         } else if (SurvivalMode.Player2Won())
         {
-            p1Controls.ChangeControlState(false);
-            p2Controls.ChangeControlState(false);
             P2VictoryScreen.SetActive(true);
+            ToggleInput(false);
         }
     }
 
@@ -74,17 +68,15 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     {
         if (Time.timeScale > 0)
         {
-            _bgmMusic.mute = true;
+            _bgmMusic.Pause();
             PauseMenu.SetActive(true);
-            p1Controls.ChangeControlState(false);
-            p2Controls.ChangeControlState(false);
+            ToggleInput(false);
             Time.timeScale = 0f;
         } else
         {
-            _bgmMusic.mute = false;
+            _bgmMusic.Play();
             PauseMenu.SetActive(false);
-            p1Controls.ChangeControlState(true);
-            p2Controls.ChangeControlState(true);
+            ToggleInput(true);
             Time.timeScale = 1f;
         }
     }
@@ -107,5 +99,13 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     {
         if (!context.performed) { return; }
         Pause?.Invoke();
+    }
+
+    void ToggleInput(bool toggle) // Enables/Disables the input for all players
+    {
+        foreach (PlayerInput _player in _allPlayers)
+        {
+            _player.enabled = toggle;
+        }
     }
 }
