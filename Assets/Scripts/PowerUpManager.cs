@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    [SerializeField] PowerUpScript[] _powerups;
+    [SerializeField] PickUp[] _powerups;
     [SerializeField] float minimumDuration = 20f;
     [SerializeField] float maximumDuration = 60f;
     PowerupSpawner[] allSpawnerZones; // All the areas where a powerup will spawn
@@ -30,7 +30,7 @@ public class PowerUpManager : MonoBehaviour
             int randPowerUpIndex = Random.Range(0, _powerups.Length); // Set up the powerup that will spawn
             int randZoneIndex = Random.Range(0, allSpawnerZones.Length); // Pick a zone that will spawn the powerup
 
-            PowerUpScript randomPowerUp = _powerups[randPowerUpIndex];
+            PickUp randomPowerUp = _powerups[randPowerUpIndex];
             PowerupSpawner randomZone = allSpawnerZones[randZoneIndex];
 
             yield return new WaitForSeconds(randomInterval); // After a random amount of time has passed, spawn the powerup

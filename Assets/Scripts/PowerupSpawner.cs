@@ -12,7 +12,7 @@ public class PowerupSpawner : MonoBehaviour
     Vector3 RandPosition;
 
 
-    public void SpawnPowerUp(PowerUpScript _randomPowerUp)
+    public void SpawnPowerUp(PickUp _randomPowerUp)
     {
         RandomizePosition();
         Instantiate(_randomPowerUp, RandPosition, transform.rotation);

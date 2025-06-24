@@ -15,6 +15,7 @@ public class BulletPool : MonoBehaviour
 
     bool powerUpActivated = false;
     bool powerUpReplaced = false;
+    string tagOfCurrentBullet = "Default";
 
     // Start is called before the first frame update
     void Awake()
@@ -75,9 +76,15 @@ public class BulletPool : MonoBehaviour
         powerUpReplaced = false;
         powerUpActivated = false;
         _bullet = reserveBullet;
+        tagOfCurrentBullet = "Default";
     }
 
     // Getters/Setters
+
+    public void SetCurrentPowerUpTag(string newTag)
+    {
+        tagOfCurrentBullet = newTag;
+    }
 
     public Bullet GetCurrentBullet()
     {
@@ -94,8 +101,8 @@ public class BulletPool : MonoBehaviour
         return powerUpActivated;
     }
 
-    public bool powerUpChanged()
+    public string getTagOfCurrentBullet()
     {
-        return powerUpReplaced;
+        return tagOfCurrentBullet;
     }
 }

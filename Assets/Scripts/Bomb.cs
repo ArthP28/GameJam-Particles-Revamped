@@ -12,8 +12,9 @@ public class Bomb : Bullet
     {
         _bulletBase = GetComponent<Bullet>();
         _hitable = _bulletBase.GetHitable();
+        _bulletBase.SetCurrentAngledVelocity(transform.right);
         StartCoroutine(BulletLife()); // This calls the Bomb's own coroutine rather than the parent bullet's
-        GetComponent<Rigidbody2D>().velocity = transform.right * _bulletBase.GetSpeed();
+        GetComponent<Rigidbody2D>().velocity = _bulletBase.GetCurrentAngledVelocity() * _bulletBase.GetSpeed();
     }
 
     private void OnDisable()
@@ -21,7 +22,7 @@ public class Bomb : Bullet
         StopCoroutine(BulletLife());
     }
 
-    IEnumerator BulletLife() // After a short amount of time, the bomb will explode
+    new IEnumerator BulletLife() // After a short amount of time, the bomb will explode
     {
         yield return new WaitForSeconds(_bulletBase.GetDuration());
         Explode();
@@ -29,7 +30,6 @@ public class Bomb : Bullet
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        _bulletBase.Bounce();
         if (GetComponent<Rigidbody2D>().IsTouchingLayers(_hitable)) // If the bomb touches anything that is hitable, it will explode.
         {
             if (collision.gameObject.GetComponent<PlayerInput>())

@@ -5,11 +5,15 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] int _health = 100;
+    [SerializeField] AudioClip healSound;
+
+    AudioSource m_AudioSource; // Required for Sound to work
     int _maxHealth; // Determines maximum amount of health that can be restored
 
     void Start()
     {
         _maxHealth = _health; // Maximum health is set to the Serialized variable health (Value manually set)
+        m_AudioSource = GetComponent<AudioSource>();
     }
 
     public void DealDamage(int damage) // Subtracts health
@@ -24,16 +28,24 @@ public class Health : MonoBehaviour
 
     public void RestoreHealth(int healthRestored) // Adds health
     {
-        if (_health < _maxHealth)
+        m_AudioSource.PlayOneShot(healSound);
+        int newHealth = _health + healthRestored;
+        if (newHealth > _maxHealth)
         {
-            Debug.Log("Health before restoring: " + _health + " | Health AFTER restoring: " + (_health + healthRestored));
-            _health += healthRestored;
+            newHealth = _maxHealth;
         }
+        Debug.Log("Health before restoring: " + _health + " | Health AFTER restoring: " + newHealth);
+        _health = newHealth;
     }
 
     public int GetCurrentHealth()
     {
         return _health;
+    }
+
+    public int GetMaxHealth()
+    {
+        return _maxHealth;
     }
 
     public void ResetHealth()

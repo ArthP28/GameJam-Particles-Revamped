@@ -4841,7 +4841,7 @@ Transform:
   m_GameObject: {fileID: 5286419274200507828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.9000015, y: 5.700001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3833921244325011116}
@@ -4912,11 +4912,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78db36cdb0a9f964db74fe620d79c5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpDuration: 15
   PowerUpName: Bomb
   P1Bullet: {fileID: 2648558436007738863, guid: b39d693ec58fbf74cbc341f6d83ba19d, type: 3}
   P2Bullet: {fileID: 1790974865797786539, guid: b0dc83f3e86b0a84592a3903ba7f2ece, type: 3}
   timeToFire: 1
-  powerUpDuration: 15
 --- !u!61 &5286419274200507824
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4941,5 +4941,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0

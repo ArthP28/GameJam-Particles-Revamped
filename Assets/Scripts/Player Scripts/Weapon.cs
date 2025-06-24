@@ -68,6 +68,8 @@ public class Weapon : MonoBehaviour
         }
         PowerUpRoutine = StartCoroutine(PowerUpDuration(powerDuration));
 
+        _bulletPool.SetCurrentPowerUpTag(PowerName);
+
         // FUTURE: Use the PowerUp's name as part of a UI element displaying the power up's duration
     }
 

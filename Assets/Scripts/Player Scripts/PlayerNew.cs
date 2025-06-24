@@ -204,9 +204,16 @@ public class PlayerNew : MonoBehaviour
 
     bool IsGrounded() // This function mainly governs the player's falling animation
     {
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position - new Vector3(0.0f, _collider.size.y / 2, 0.0f), Vector2.down, 0.5f, LayerMask.GetMask("Ground"));
         if (_rigidbody.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             _anim.SetBool("OnGround", true);
+
+            /*
+            Vector2 normalPerpendicular = Vector2.Perpendicular(hit.normal);
+            float downAngle = Vector2.Angle(hit.normal, Vector2.up);
+            Debug.Log("Player angle: " + downAngle);
+            */
             return true;
         }
         else

@@ -4,37 +4,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PowerUpScript : MonoBehaviour
+public class PowerUpScript : PickUp
 {
     [SerializeField] string PowerUpName;
     [SerializeField] Bullet P1Bullet;
     [SerializeField] Bullet P2Bullet;
     [SerializeField] float timeToFire;
-    [SerializeField] int powerUpDuration = 15;
-
-    CinemachineTargetGroup _cameraTargetGroup;
-
-    private void Awake()
-    {
-        _cameraTargetGroup = FindObjectOfType<CinemachineTargetGroup>();
-        _cameraTargetGroup.AddMember(transform, 1, 0);
-    }
-
-    private void Start()
-    {
-        StartCoroutine(PowerUpLife());
-    }
-
-    private void OnDestroy()
-    {
-        _cameraTargetGroup.RemoveMember(transform);
-    }
-
-    IEnumerator PowerUpLife()
-    {
-        yield return new WaitForSeconds(powerUpDuration);
-        Destroy(gameObject);
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
