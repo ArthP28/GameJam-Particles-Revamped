@@ -169,7 +169,7 @@ public class PlayerNew : MonoBehaviour
         if (_health.GetCurrentHealth() <= 0 && isAlive)
         {
             // Player is not alive anymore
-            Debug.Log("Player 1 Dead");
+            Debug.Log("Player Dead");
             isAlive = false;
 
             // Player explodes and disappears
@@ -177,6 +177,10 @@ public class PlayerNew : MonoBehaviour
             _playerSprite.gameObject.SetActive(false);
             antiGravEffect.Stop();
             _weapon.LoseUpgrade(); // Player loses his upgraded weapon upon dying
+            if (GetComponentInChildren<Shield>()) // If the player has a shield, destroy that as well
+            {
+                Destroy(GetComponentInChildren<Shield>().gameObject);
+            }
 
             // Turn off player gravity and velocity
             _rigidbody.gravityScale = 0;

@@ -19,7 +19,7 @@ public class BombExplosion : ExplosionScript
     {
         if (rb.IsTouchingLayers(_hitable))
         {
-            if (collision.gameObject.GetComponent<PlayerInput>())
+            if (collision.gameObject.GetComponent<PlayerInput>() && !collision.gameObject.GetComponentInChildren<Shield>())
             {
                 PlayerInput opposingPlayer = collision.gameObject.GetComponent<PlayerInput>();
                 if (ExplosionofPlayersBomb != opposingPlayer.playerNum)
