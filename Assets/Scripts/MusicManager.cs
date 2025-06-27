@@ -13,6 +13,5 @@ public class MusicManager : MonoBehaviour
         musicManager = GetComponent<AudioSource>();
         int randIndex = (int)Random.Range(0, musicTracks.Length);
         musicManager.clip = musicTracks[randIndex];
-        musicManager.Play();
     }
 }
