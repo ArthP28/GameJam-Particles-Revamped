@@ -4826,7 +4826,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   bulletOfPlayersWeapon: 1
-  _steeringForce: 10
+  _steeringForce: 5
 --- !u!199 &5427188578526294536
 ParticleSystemRenderer:
   serializedVersion: 6

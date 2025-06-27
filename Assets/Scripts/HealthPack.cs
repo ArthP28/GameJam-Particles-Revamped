@@ -13,6 +13,7 @@ public class HealthPack : PickUp
             Health playerHealth = collision.GetComponent<Health>();
             if(playerHealth.GetCurrentHealth() < playerHealth.GetMaxHealth())
             {
+                collision.GetComponent<PlayerNew>().CreateHealthMessage(amount);
                 playerHealth.RestoreHealth(amount);
                 Destroy(gameObject);
             }

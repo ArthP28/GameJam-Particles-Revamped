@@ -4938,7 +4938,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2404b8a8b49b6994fb6ca5d0fc52cced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PowerUpName: Shield
   powerUpDuration: 15
   playerShields:
   - {fileID: 6266740947534156603, guid: 5c6d3a044d409ef45ab81c7e7a754080, type: 3}
   - {fileID: 6266740947534156603, guid: d4de772816069dc4f8bb0caa4aa54dec, type: 3}
+  TimerFillIcon: {fileID: 21300000, guid: 38bf557800d1d444782dec74c4579823, type: 3}

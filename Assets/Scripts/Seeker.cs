@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Seeker : Bullet
 {
-    [SerializeField] float _steeringForce; // The value that determines how high/low the bullet should fly when seeking
+    [SerializeField] float _steeringForce = 5f; // The value that determines how high/low the bullet should fly when seeking
     PlayerNew _target;
     Bullet _bulletBase; // The inherited variables and methods of its parent Bullet script
     LayerMask _hitable; // What this bullet can hit and cause damage

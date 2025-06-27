@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class PowerUpScript : PickUp
 {
-    [SerializeField] string PowerUpName;
     [SerializeField] Bullet P1Bullet;
     [SerializeField] Bullet P2Bullet;
     [SerializeField] float timeToFire;
+    [SerializeField] Sprite TimerFillIcon;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,6 +27,8 @@ public class PowerUpScript : PickUp
                 Debug.Log("Player 2 obtains " + name);
                 Destroy(gameObject);
             }
+            collision.GetComponent<PlayerNew>().CreatePowerUpTimer(powerUpDuration, TimerFillIcon);
+            collision.GetComponent<PlayerNew>().CreatePickUpMessage(PowerUpName);
         }
     }
 }

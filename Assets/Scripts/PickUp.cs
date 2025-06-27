@@ -5,7 +5,9 @@ using UnityEngine;
 
 public abstract class PickUp : MonoBehaviour
 {
+    [SerializeField] protected string PowerUpName;
     [SerializeField] protected int powerUpDuration = 15;
+
 
     CinemachineTargetGroup _cameraTargetGroup;
 
@@ -29,5 +31,10 @@ public abstract class PickUp : MonoBehaviour
     {
         yield return new WaitForSeconds(powerUpDuration);
         Destroy(gameObject);
+    }
+
+    public virtual void DisplayMessage(PowerUpUI ui, string pickUpName)
+    {
+
     }
 }

@@ -11,15 +11,25 @@ public class Shield : MonoBehaviour
     [SerializeField] AudioClip deactivatingSound;
 
     AudioSource m_AudioSource; // Required for Sound to work
+    Coroutine shieldCoroutine;
 
     private void Start()
+    {
+        ActivateShield();
+    }
+
+    public void ActivateShield()
     {
         if (GetComponentInParent<AudioSource>())
         {
             m_AudioSource = GetComponentInParent<AudioSource>();
             m_AudioSource.PlayOneShot(activatingSound);
         }
-        StartCoroutine(ShieldLifeTime());
+        if (shieldCoroutine != null)
+        {
+            StopCoroutine(shieldCoroutine);
+        }
+        shieldCoroutine = StartCoroutine(ShieldLifeTime());
     }
 
     IEnumerator ShieldLifeTime()
@@ -30,6 +40,11 @@ public class Shield : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (GetComponentInParent<PlayerNew>())
+        {
+            GetComponentInParent<PlayerNew>().RemoveEffectTimer();
+            GetComponentInParent<PlayerNew>().DeleteMessage();
+        }
         m_AudioSource.PlayOneShot(deactivatingSound);
     }
 

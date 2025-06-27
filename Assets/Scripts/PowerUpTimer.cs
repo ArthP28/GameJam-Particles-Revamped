@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PowerUpTimer : MonoBehaviour
 {
     [SerializeField] Image _fill; // Graphic that shows how much time is left
+    [SerializeField] Image _fillbase; // Graphic that shows how much time is left
     float _time = 15;
     float _currTime;
 
@@ -28,5 +29,11 @@ public class PowerUpTimer : MonoBehaviour
     {
         _time = newTime;
         _currTime = _time;
+    }
+
+    public void ChangeFill(Sprite newFillSprite)
+    {
+        _fill.sprite = newFillSprite;
+        _fillbase.sprite = newFillSprite;
     }
 }

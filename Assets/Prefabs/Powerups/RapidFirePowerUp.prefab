@@ -4912,11 +4912,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78db36cdb0a9f964db74fe620d79c5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpDuration: 15
   PowerUpName: Rapid-Fire
+  powerUpDuration: 15
   P1Bullet: {fileID: 2546582735971570047, guid: 68809154a8305e845a67ceac640b818e, type: 3}
   P2Bullet: {fileID: 7043721860308946281, guid: 2b48bfeb180e2c24888755a98c2b98b0, type: 3}
   timeToFire: 0.1
+  TimerFillIcon: {fileID: 21300000, guid: e40e3faabf79f9440b1fd7f0203d699c, type: 3}
 --- !u!61 &5286419274200507824
 BoxCollider2D:
   m_ObjectHideFlags: 0

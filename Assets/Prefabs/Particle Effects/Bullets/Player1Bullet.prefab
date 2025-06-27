@@ -4820,7 +4820,7 @@ MonoBehaviour:
   impactEffects:
   - {fileID: 8970262820225571662, guid: fd8dc9a342c73f74a8e3713221c0c23d, type: 3}
   - {fileID: 8970262820225571662, guid: 493cb4283e97a1e46a5047102e2eeb5b, type: 3}
-  MaxAngle: 45
+  MaxAngle: 72.5
   MinAngle: 25
   _hitable:
     serializedVersion: 2

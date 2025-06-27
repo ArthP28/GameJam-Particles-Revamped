@@ -5,6 +5,7 @@ using UnityEngine;
 public class DefensePickup : PickUp
 {
     [SerializeField] Shield[] playerShields;
+    [SerializeField] Sprite TimerFillIcon;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerInput>())
@@ -22,12 +23,20 @@ public class DefensePickup : PickUp
                 Debug.Log("Player 2 obtains " + name);
                 Destroy(gameObject);
             }
+            collision.GetComponent<PlayerNew>().CreateEffectTimer(powerUpDuration, TimerFillIcon);
+            collision.GetComponent<PlayerNew>().CreatePickUpMessage(PowerUpName);
         }
     }
 
     void CreateShield(PlayerInput player, Shield shield)
     {
-        Instantiate(shield, player.transform);
+        if (!player.GetComponentInChildren<Shield>())
+        {
+            Instantiate(shield, player.transform);
+        } else
+        {
+            player.GetComponentInChildren<Shield>().ActivateShield();
+        }
         shield.transform.position = new Vector2(0.22f, -0.89f);
     }
 }

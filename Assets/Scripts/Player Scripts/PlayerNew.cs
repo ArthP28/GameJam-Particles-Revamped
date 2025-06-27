@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Weapon))]
@@ -38,9 +39,13 @@ public class PlayerNew : MonoBehaviour
     Health _health;
     PlayerInput _playerInput;
     FrameInput _frameInput;
+    PowerUpUI _playersPowerUpUI;
+    Coroutine DisplayMessageRoutine;
+
     private void Awake()
     {
         _weapon = GetComponent<Weapon>();
+        _playersPowerUpUI = FindPowerUpUI();
     }
 
     // Set all variables upon start
@@ -225,6 +230,66 @@ public class PlayerNew : MonoBehaviour
             _anim.SetBool("OnGround", false);
             return false;
         }
+    }
+
+    PowerUpUI FindPowerUpUI()
+    {
+        PowerUpUI _uiToAdd = null;
+        PowerUpUI[] allUIs = FindObjectsOfType<PowerUpUI>();
+        foreach (PowerUpUI ui in allUIs)
+        {
+            if (ui.playerOfUI == GetComponent<PlayerInput>().playerNum)
+            {
+                _uiToAdd = ui;
+            }
+        }
+
+        Assert.IsNotNull(_uiToAdd, "Script has detected a null powerup UI. \nMake sure that each player UI is assigned to the correct player number.");
+
+        return _uiToAdd;
+    }
+
+    public void CreatePowerUpTimer(int duration, Sprite fillSprite)
+    {
+        _playersPowerUpUI.ActivatePowerUpTimer(duration, fillSprite);
+    }
+
+    public void CreateEffectTimer(int duration, Sprite fillSprite)
+    {
+        _playersPowerUpUI.ActivateEffectTimer(duration, fillSprite);
+    }
+
+    public void RemovePowerUpTimer()
+    {
+        _playersPowerUpUI.DeActivatePowerUpTimer();
+    }
+
+    public void RemoveEffectTimer()
+    {
+        _playersPowerUpUI.DeActivateEffectTimer();
+    }
+
+    public void CreatePickUpMessage(string name)
+    {
+        if (DisplayMessageRoutine != null)
+        {
+            StopCoroutine(DisplayMessageRoutine);
+        }
+        DisplayMessageRoutine = StartCoroutine(_playersPowerUpUI.DisplayMessage(name));
+    }
+
+    public void DeleteMessage()
+    {
+        _playersPowerUpUI.RemoveMessage();
+    }
+
+    public void CreateHealthMessage(int hp)
+    {
+        if (DisplayMessageRoutine != null)
+        {
+            StopCoroutine(DisplayMessageRoutine);
+        }
+        DisplayMessageRoutine = StartCoroutine(_playersPowerUpUI.HealthMessage(hp));
     }
 
     // Getters/Setters

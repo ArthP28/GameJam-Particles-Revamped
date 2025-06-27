@@ -23,16 +23,8 @@ public class Weapon : MonoBehaviour
 
     BulletPool _bulletPool; // All bullets are handled in this object pool
 
-    PowerUpUI _playersPowerUpUI;
-
-    private void Awake()
-    {
-        _playersPowerUpUI = FindPowerUpUI();
-    }
-
     void Start()
     {
-        Debug.Log(_playersPowerUpUI);
         m_AudioSource = GetComponent<AudioSource>();
         _bulletPool = GetComponent<BulletPool>();
         reserveTime = timeBeforeNextFire;
@@ -51,14 +43,6 @@ public class Weapon : MonoBehaviour
         // The bullet and its firing time changes to the new powerup
         _bulletPool.SwitchBullet(newBullet);
         timeBeforeNextFire = newTime;
-
-        _playersPowerUpUI.ActivateTimer(powerDuration);
-
-        if (DisplayMessageRoutine != null)
-        {
-            StopCoroutine(DisplayMessageRoutine);
-        }
-        DisplayMessageRoutine = StartCoroutine(_playersPowerUpUI.DisplayMessage(PowerName));
 
         // If a powerup is already in effect, restart the PowerUp Coroutine.
         // This allows for the player's powerup to be kept without losing it too early
@@ -83,8 +67,8 @@ public class Weapon : MonoBehaviour
     {
         if (_bulletPool.GetCurrentBullet() != _bulletPool.GetReserveBullet())
         {
-            _playersPowerUpUI.DeActivateTimer();
-            _playersPowerUpUI.RemoveMessage();
+            GetComponent<PlayerNew>().RemovePowerUpTimer();
+            GetComponent<PlayerNew>().DeleteMessage();
             m_AudioSource.PlayOneShot(losePowerSound);
             _bulletPool.RevertToDefaultBullet();
             timeBeforeNextFire = reserveTime;
@@ -106,22 +90,5 @@ public class Weapon : MonoBehaviour
         alreadyFired = false;
 
 
-    }
-
-    PowerUpUI FindPowerUpUI()
-    {
-        PowerUpUI _uiToAdd = null;
-        PowerUpUI[] allUIs = FindObjectsOfType<PowerUpUI>();
-        foreach (PowerUpUI ui in allUIs)
-        {
-            if (ui.playerOfUI == GetComponent<PlayerInput>().playerNum)
-            {
-                _uiToAdd = ui;
-            }
-        }
-
-        Assert.IsNotNull( _uiToAdd, "Script has detected a null powerup UI. \nMake sure that each player UI is assigned to the correct player number.");
-
-        return _uiToAdd;
     }
 }
