@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class Bomb : Bullet
 {
     [SerializeField] GameObject Explosion; // The colored explosion of the bomb
+    CinemachineImpulseSource _impulseSource;
     Bullet _bulletBase; // The inherited variables and methods of its parent Bullet script
     LayerMask _hitable; // What objects cause the bomb to explode
 
@@ -12,6 +14,7 @@ public class Bomb : Bullet
     {
         _bulletBase = GetComponent<Bullet>();
         _hitable = _bulletBase.GetHitable();
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
         _bulletBase.SetCurrentAngledVelocity(transform.right);
         StartCoroutine(BulletLife()); // This calls the Bomb's own coroutine rather than the parent bullet's
         GetComponent<Rigidbody2D>().velocity = _bulletBase.GetCurrentAngledVelocity() * _bulletBase.GetSpeed();
@@ -61,6 +64,7 @@ public class Bomb : Bullet
 
     public void Explode()
     {
+        _impulseSource.GenerateImpulse();
         Instantiate(Explosion, transform.position, transform.rotation);
         _bulletBase.DetermineBulletDestruction(); // Ditto for bomb
     }
