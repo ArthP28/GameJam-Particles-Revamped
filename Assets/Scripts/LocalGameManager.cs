@@ -19,6 +19,8 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     [SerializeField] GameObject TieScreen;
     [SerializeField] TextMeshProUGUI countDownText;
     [SerializeField] int countDownTime = 3;
+    [SerializeField] AudioClip _countSound;
+    [SerializeField] AudioClip _startSound;
 
     [SerializeField] AudioSource _bgmMusic;
     [SerializeField] bool enableCountdown = true;
@@ -114,11 +116,13 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
         countDownText.gameObject.SetActive(true);
         while (countDownTime > 0)
         {
+            _bgmMusic.PlayOneShot(_countSound);
             countDownText.text = countDownTime.ToString();
             yield return new WaitForSeconds(1f);
             countDownTime--;
         }
         countDownText.text = "START";
+        _bgmMusic.PlayOneShot(_startSound);
         ToggleInput(true);
         _bgmMusic.Play();
         _powerUpManager.enabled = true;
