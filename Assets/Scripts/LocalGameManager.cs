@@ -23,6 +23,7 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     [SerializeField] AudioClip _startSound;
 
     [SerializeField] AudioSource _bgmMusic;
+    [SerializeField] AudioClip _victoryMusic;
     [SerializeField] bool enableCountdown = true;
 
     PlayerInput[] _allPlayers;
@@ -72,17 +73,25 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     // Update is called once per frame
     void Update()
     {
-        if(SurvivalMode.Player1Won() && SurvivalMode.Player2Won())
+        if (SurvivalMode.Player1Won() || SurvivalMode.Player2Won())
         {
-            TieScreen.SetActive(true);
-            ToggleInput(false);
-        } else if (SurvivalMode.Player1Won())
-        {
-            P1VictoryScreen.SetActive(true);
-            ToggleInput(false);
-        } else if (SurvivalMode.Player2Won())
-        {
-            P2VictoryScreen.SetActive(true);
+            if(_bgmMusic.clip != _victoryMusic)
+            {
+                _bgmMusic.clip = _victoryMusic;
+                _bgmMusic.Play();
+            }
+            if (SurvivalMode.Player1Won() && SurvivalMode.Player2Won())
+            {
+                TieScreen.SetActive(true);
+            }
+            else if (SurvivalMode.Player1Won())
+            {
+                P1VictoryScreen.SetActive(true);
+            }
+            else if (SurvivalMode.Player2Won())
+            {
+                P2VictoryScreen.SetActive(true);
+            }
             ToggleInput(false);
         }
     }

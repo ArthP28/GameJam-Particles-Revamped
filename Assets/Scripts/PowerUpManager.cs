@@ -24,7 +24,7 @@ public class PowerUpManager : MonoBehaviour
 
     IEnumerator SpawnPowerUp() // Have the game generate a random powerup in a random part of the game arena.
     {
-        while (!_game.Player1Won() || !_game.Player2Won())
+        while (!_game.Player1Won() && !_game.Player2Won())
         {
             float randomInterval = Random.Range(minimumDuration, maximumDuration); // Set up random time
             int randPowerUpIndex = Random.Range(0, _powerups.Length); // Set up the powerup that will spawn
@@ -35,9 +35,12 @@ public class PowerUpManager : MonoBehaviour
 
             yield return new WaitForSeconds(randomInterval); // After a random amount of time has passed, spawn the powerup
 
-            randomZone.SpawnPowerUp(randomPowerUp); // Once the powerup has spawned, restart the time and spawn another powerup again
+            if(!_game.Player1Won() && !_game.Player2Won())
+            {
+                randomZone.SpawnPowerUp(randomPowerUp); // Once the powerup has spawned, restart the time and spawn another powerup again
 
-            Debug.Log(randomPowerUp + "Spawned after " + (int)randomInterval + " seconds.");
+                Debug.Log(randomPowerUp + "Spawned after " + (int)randomInterval + " seconds.");
+            }
         }
     }
 }
