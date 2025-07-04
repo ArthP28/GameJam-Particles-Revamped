@@ -10,7 +10,7 @@ public class TitleManager : MonoBehaviour
     public void GoToBattle()
     {
         LoadingScreen.SetActive(true);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level2");
     }
 
     public void GoToHowToPlay()
