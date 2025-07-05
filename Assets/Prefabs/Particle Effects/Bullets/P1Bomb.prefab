@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1384284089517519278}
   - component: {fileID: 2648558436007738863}
   - component: {fileID: 105367522093877910}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: P1Bomb
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -5029,7 +5029,7 @@ MonoBehaviour:
   MinAngle: 5
   _hitable:
     serializedVersion: 2
-    m_Bits: 1537
+    m_Bits: 3840
   bulletOfPlayersWeapon: 0
   Explosion: {fileID: 8970262820225571662, guid: b72ebd03121d2104e8b4ad813a85aef0, type: 3}
 --- !u!114 &105367522093877910

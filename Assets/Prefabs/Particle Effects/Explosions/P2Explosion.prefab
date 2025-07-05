@@ -14559,7 +14559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitable:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 2176
   damage: 20
   impactEffect: {fileID: 8970262820225571662, guid: 60bdb3953392f1a48a4bbd55964d7f49, type: 3}
   ExplosionofPlayersBomb: 1

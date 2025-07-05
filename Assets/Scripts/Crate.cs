@@ -17,25 +17,40 @@ public class Crate : MonoBehaviour
         _crate = GetComponentInChildren<BoxCollider2D>();
     }
 
+    /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<Bullet>())
         {
             Bullet bullet = collision.gameObject.GetComponent<Bullet>();
-            bullet.Miss();
-            bullet.DetermineBulletDestruction();
-            Debug.Log("Crate Destroyed");
-            DropRandomItem();
-            if (respawnable)
+            if (bullet.GetComponent<Bomb>())
             {
-                _crate.gameObject.SetActive(false);
-                StartCoroutine(Respawn());
+                bullet.GetComponent<Bomb>().Explode();
             } else
             {
-                Destroy(_crate.gameObject);
+                bullet.Miss();
+                bullet.DetermineBulletDestruction();
             }
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            GetComponent<Rigidbody2D>().angularVelocity = 0f;
+            DestroyCrate();
+        } else if (collision.gameObject.GetComponent<BombExplosion>())
+        {
+            DestroyCrate();
+        }
+    }
+    */
+
+    public void DestroyCrate()
+    {
+        Debug.Log("Crate Destroyed");
+        DropRandomItem();
+        if (respawnable)
+        {
+            StartCoroutine(Respawn());
+            _crate.gameObject.SetActive(false);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -45,14 +60,20 @@ public class Crate : MonoBehaviour
         {
             int randItemIndex = Random.Range(0, _items.Length); // Set up the powerup that will spawn
             PickUp randomItem = _items[randItemIndex];
-            Instantiate(randomItem, new Vector3(transform.position.x, transform.position.y + 1f, 0f), Quaternion.identity);
+            if (randomItem)
+            {
+                Instantiate(randomItem, new Vector3(_crate.transform.position.x, _crate.transform.position.y + 1f, 0f), Quaternion.identity);
+            }
         }
     }
 
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(_timeBeforeRespawn);
-        transform.position = respawnPosition;
         _crate.gameObject.SetActive(true);
+        _crate.transform.position = respawnPosition;
+        _crate.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        _crate.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+        _crate.GetComponent<Rigidbody2D>().rotation = 0f;
     }
 }

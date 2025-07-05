@@ -35,15 +35,7 @@ public class Bomb : Bullet
     {
         if (GetComponent<Rigidbody2D>().IsTouchingLayers(_hitable)) // If the bomb touches anything that is hitable, it will explode.
         {
-            if (collision.gameObject.GetComponent<PlayerInput>())
-            {
-                PlayerInput opposingPlayer = collision.gameObject.GetComponent<PlayerInput>();
-                if (_bulletBase.bulletOfPlayersWeapon != opposingPlayer.playerNum)
-                {
-                    Explode();
-                }
-            }
-            else if (collision.gameObject.GetComponent<Bomb>()) // As of now, the bomb has its own case where it collides with another of the same type. A future revamp of the bullet script will address this as well
+            if (collision.gameObject.GetComponent<Bomb>()) // As of now, the bomb has its own case where it collides with another of the same type. A future revamp of the bullet script will address this as well
             {
                 /* 
                  * Note: If two of the player's own bombs explode, the resulting explosion will deal twice the damage.
@@ -51,14 +43,13 @@ public class Bomb : Bullet
                  */
                 Bomb opposingBomb = collision.gameObject.GetComponent<Bomb>();
                 opposingBomb.Explode();
-                Explode();
             }
             else if (collision.gameObject.GetComponent<Bullet>())
             {
                 Bullet opposingBullet = collision.gameObject.GetComponent<Bullet>();
                 opposingBullet.DetermineBulletDestruction();
-                Explode();
             }
+            Explode();
         }
     }
 

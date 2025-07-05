@@ -51,13 +51,13 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
         Pause += PauseGame;
         if (enableCountdown)
         {
-            _powerUpManager.enabled = false;
+            ChangePowerUpManagerState(false);
             gameStarted = false;
             ToggleInput(false);
             StartCoroutine(StartCountdown());
         } else
         {
-            _powerUpManager.enabled = true;
+            ChangePowerUpManagerState(true);
             gameStarted = true;
             _bgmMusic.Play();
         }
@@ -134,7 +134,7 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
         _bgmMusic.PlayOneShot(_startSound);
         ToggleInput(true);
         _bgmMusic.Play();
-        _powerUpManager.enabled = true;
+        ChangePowerUpManagerState(true);
         gameStarted = true;
         yield return new WaitForSeconds(1f);
         countDownText.gameObject.SetActive(false);
@@ -165,6 +165,14 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
         foreach (PlayerInput _player in _allPlayers)
         {
             _player.enabled = toggle;
+        }
+    }
+
+    void ChangePowerUpManagerState(bool state)
+    {
+        if (_powerUpManager)
+        {
+            _powerUpManager.enabled = state;
         }
     }
 }

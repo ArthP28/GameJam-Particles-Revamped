@@ -5031,7 +5031,7 @@ MonoBehaviour:
   MinAngle: 5
   _hitable:
     serializedVersion: 2
-    m_Bits: 385
+    m_Bits: 3456
   bulletOfPlayersWeapon: 1
   Explosion: {fileID: 8970262820225571662, guid: bb16dffe30b22314b91d4faf736e64a1, type: 3}
 --- !u!114 &4937550831276162696

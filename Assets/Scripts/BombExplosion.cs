@@ -29,6 +29,12 @@ public class BombExplosion : ExplosionScript
                     opposingPlayer.GetComponent<Health>().DealDamage(damage);
                 }
             }
+            if (collision.gameObject.GetComponentInParent<Crate>())
+            {
+                Crate _crate = collision.gameObject.GetComponentInParent<Crate>();
+                Debug.Log(_crate);
+                _crate.DestroyCrate();
+            }
         }
     }
 }

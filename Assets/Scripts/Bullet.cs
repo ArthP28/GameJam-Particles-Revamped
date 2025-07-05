@@ -73,9 +73,21 @@ public class Bullet : MonoBehaviour
             else if (collision.gameObject.GetComponent<Bullet>()) // If it hits another projectile, "destroy" both bullets
             {
                 Bullet opposingBullet = collision.gameObject.GetComponent<Bullet>();
-                opposingBullet.DetermineBulletDestruction();
+                if (opposingBullet.GetComponent<Bomb>())
+                {
+                    opposingBullet.GetComponent<Bomb>().Explode();
+                } else
+                {
+                    opposingBullet.DetermineBulletDestruction();
+                }
                 DetermineBulletDestruction();
                 Miss();
+            }
+            else if (collision.gameObject.GetComponentInParent<Crate>())
+            {
+                Crate _crate = collision.gameObject.GetComponentInParent<Crate>();
+                _crate.DestroyCrate();
+                DetermineBulletDestruction();
             }
         } else // The bullet must have collided with a wall/the ground
         {

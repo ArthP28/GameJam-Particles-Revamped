@@ -4824,7 +4824,7 @@ MonoBehaviour:
   MinAngle: 25
   _hitable:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 3584
   bulletOfPlayersWeapon: 0
 --- !u!199 &5427188578526294536
 ParticleSystemRenderer:
