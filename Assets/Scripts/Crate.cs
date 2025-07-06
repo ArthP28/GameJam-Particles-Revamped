@@ -17,29 +17,6 @@ public class Crate : MonoBehaviour
         respawnPosition = transform.position;
         _crate = GetComponentInChildren<BoxCollider2D>();
     }
-
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Bullet>())
-        {
-            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
-            if (bullet.GetComponent<Bomb>())
-            {
-                bullet.GetComponent<Bomb>().Explode();
-            } else
-            {
-                bullet.Miss();
-                bullet.DetermineBulletDestruction();
-            }
-            DestroyCrate();
-        } else if (collision.gameObject.GetComponent<BombExplosion>())
-        {
-            DestroyCrate();
-        }
-    }
-    */
-
     public void DestroyCrate()
     {
         Debug.Log("Crate Destroyed");
