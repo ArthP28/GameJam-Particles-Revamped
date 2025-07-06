@@ -8,6 +8,7 @@ public class Crate : MonoBehaviour
     [SerializeField] PickUp[] _items;
     [SerializeField] bool respawnable = false;
     [SerializeField] float _timeBeforeRespawn = 30f;
+    [SerializeField] ParticleSystem _debris;
     BoxCollider2D _crate;
     Vector2 respawnPosition;
 
@@ -42,6 +43,7 @@ public class Crate : MonoBehaviour
     public void DestroyCrate()
     {
         Debug.Log("Crate Destroyed");
+        Instantiate(_debris, _crate.transform.position, Quaternion.identity);
         DropRandomItem();
         if (respawnable)
         {

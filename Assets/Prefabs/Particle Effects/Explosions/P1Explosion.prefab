@@ -28,7 +28,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1273948165881350991}
   m_RootOrder: 0
@@ -9916,7 +9916,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.54
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -10032,7 +10032,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2.5
+      scalar: 3
       minScalar: 1.25
       maxCurve:
         serializedVersion: 2
@@ -14762,6 +14762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2ff6fbca00d7c4d8ccfbb5f64c11ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forceRadius: 11.57
+  _force: 10
   _hitable:
     serializedVersion: 2
     m_Bits: 2560

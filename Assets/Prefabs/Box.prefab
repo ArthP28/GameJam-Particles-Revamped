@@ -56,7 +56,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   respawnable: 1
-  _timeBeforeRespawn: 5
+  _timeBeforeRespawn: 15
+  _debris: {fileID: 2871566352125287176, guid: a6ae437e8a57978409119e6663543aa2, type: 3}
 --- !u!1 &2936533823501672676
 GameObject:
   m_ObjectHideFlags: 0
