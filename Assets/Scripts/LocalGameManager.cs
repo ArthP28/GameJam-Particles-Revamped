@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
 {
+    [Tooltip("Please Type in the EXACT Scene Name as it is in Unity or it will not work")]
+    [SerializeField] string levelName;
     [SerializeField] GameObject LoadingScreen;
 
     SurvivalBattleScript SurvivalMode;
@@ -144,7 +146,7 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     {
         Time.timeScale = 1f;
         LoadingScreen.SetActive(true);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(levelName);
     }
 
     public void ReturnToMenu()
