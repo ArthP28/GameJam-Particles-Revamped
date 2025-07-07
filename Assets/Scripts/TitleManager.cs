@@ -7,6 +7,13 @@ public class TitleManager : MonoBehaviour
 {
 
     [SerializeField] GameObject LoadingScreen;
+    Animator _anim;
+
+    void Start()
+    {
+        _anim = GetComponent<Animator>();
+    }
+
     public void GoToBattle()
     {
         LoadingScreen.SetActive(true);
@@ -15,8 +22,7 @@ public class TitleManager : MonoBehaviour
 
     public void GoToHowToPlay()
     {
-        LoadingScreen.SetActive(true);
-        SceneManager.LoadScene("HowToPlay");
+        _anim.Play("TitleToHowToPlay");
     }
 
     public void GoToCredits()
