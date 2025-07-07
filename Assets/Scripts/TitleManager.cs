@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
-
     [SerializeField] GameObject LoadingScreen;
+    [SerializeField] string[] LevelPaths;
+    [SerializeField] GameObject[] LevelPreviews;
+    int currentPathIndex = 0;
     Animator _anim;
 
     void Start()
@@ -17,24 +19,48 @@ public class TitleManager : MonoBehaviour
     public void GoToBattle()
     {
         LoadingScreen.SetActive(true);
-        SceneManager.LoadScene("Level2");
+        SceneManager.LoadScene(LevelPaths[currentPathIndex]);
     }
 
-    public void GoToHowToPlay()
+    public void SelectRight()
     {
-        _anim.Play("TitleToHowToPlay");
+        currentPathIndex++;
+        if (currentPathIndex >= LevelPaths.Length)
+        {
+            LevelPreviews[LevelPaths.Length - 1].SetActive(false);
+            currentPathIndex = 0;
+        } else
+        {
+            LevelPreviews[currentPathIndex-1].SetActive(false);
+        }
+        LevelPreviews[currentPathIndex].SetActive(true);
     }
 
-    public void GoToCredits()
+    public void SelectLeft()
     {
-        LoadingScreen.SetActive(true);
-        SceneManager.LoadScene("Credits");
+        currentPathIndex--;
+        if (currentPathIndex < 0)
+        {
+            LevelPreviews[0].SetActive(false);
+            currentPathIndex = LevelPaths.Length - 1;
+        }
+        else
+        {
+            LevelPreviews[currentPathIndex+1].SetActive(false);
+        }
+        LevelPreviews[currentPathIndex].SetActive(true);
     }
 
     public void GoToTitle()
     {
         LoadingScreen.SetActive(true);
         SceneManager.LoadScene("Menu");
+    }
+
+    public void GoToCredits()
+    {
+        LoadingScreen.SetActive(true);
+        SceneManager.LoadScene("Credits");
     }
 
     public void QuitGame()
