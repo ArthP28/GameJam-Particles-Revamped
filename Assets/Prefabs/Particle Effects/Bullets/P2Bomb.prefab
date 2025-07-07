@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1384284089517519278}
   - component: {fileID: 1790974865797786539}
   - component: {fileID: 4937550831276162696}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: P2Bomb
   m_TagString: PowerUp
   m_Icon: {fileID: 0}

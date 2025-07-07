@@ -20,6 +20,7 @@ public class Weapon : MonoBehaviour
     float reserveTime; // The original fire time is preserved in this variable while the powerup is still in effect
 
     bool alreadyFired = false;
+    bool isActivated = true;
 
     BulletPool _bulletPool; // All bullets are handled in this object pool
 
@@ -53,8 +54,6 @@ public class Weapon : MonoBehaviour
         PowerUpRoutine = StartCoroutine(PowerUpDuration(powerDuration));
 
         _bulletPool.SetCurrentPowerUpTag(PowerName);
-
-        // FUTURE: Use the PowerUp's name as part of a UI element displaying the power up's duration
     }
 
     IEnumerator PowerUpDuration(int powerUpTimeLimit)
@@ -90,5 +89,15 @@ public class Weapon : MonoBehaviour
         alreadyFired = false;
 
 
+    }
+
+    public bool getActivated()
+    {
+        return isActivated;
+    }
+
+    public void SetActivated(bool activated)
+    {
+        isActivated = activated;
     }
 }

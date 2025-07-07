@@ -4461,8 +4461,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: An underground cavern with unstable platforms and a lava pit below. Watch
-    your step!
+  m_text: Within the uncharted lands of a distant exoplanet lies an underground cavern
+    with unstable platforms and a lava pit below. Watch your step!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b67b6a89cb98afc45a71e0cb8a60d943, type: 2}
   m_sharedMaterial: {fileID: -6834204115047181319, guid: b67b6a89cb98afc45a71e0cb8a60d943, type: 2}
@@ -6917,8 +6917,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A section of a space station that is under construction. Use the most out
-    of your Anti-Gravity skills to maneuver across each platform!
+  m_text: A section of a space station under construction. Mastering your Anti-Gravity
+    skills is a must when maneuvering across each platform!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b67b6a89cb98afc45a71e0cb8a60d943, type: 2}
   m_sharedMaterial: {fileID: -6834204115047181319, guid: b67b6a89cb98afc45a71e0cb8a60d943, type: 2}

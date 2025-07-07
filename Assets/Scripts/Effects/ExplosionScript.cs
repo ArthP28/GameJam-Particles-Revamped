@@ -19,7 +19,10 @@ public class ExplosionScript : MonoBehaviour
         _mainParticles = GetComponent<ParticleSystem>();
         _source = GetComponent<AudioSource>();
         _source.Play();
-        ProduceForcePulse();
+        if (_forceRadius > 0 && _force > 0)
+        {
+            ProduceForcePulse();
+        }
     }
 
     private void OnDisable()
@@ -52,10 +55,13 @@ public class ExplosionScript : MonoBehaviour
 
     IEnumerator ApplyKnockBack(Rigidbody2D obj_rb, Vector3 direction, float thrust)
     {
-        Vector3 force = (obj_rb.transform.position - direction).normalized * thrust * obj_rb.mass;
-        obj_rb.AddForce(force, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.2f);
-        obj_rb.velocity = Vector2.zero; // After _knockBackTime seconds, stop the knockback
+        if (obj_rb)
+        {
+            Vector3 force = (obj_rb.transform.position - direction).normalized * thrust * obj_rb.mass;
+            obj_rb.AddForce(force, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(0.2f);
+            obj_rb.velocity = Vector2.zero; // After _knockBackTime seconds, stop the knockback
+        }
     }
 
     private void OnDrawGizmos()

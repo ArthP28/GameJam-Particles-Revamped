@@ -139,8 +139,11 @@ public class PlayerNew : MonoBehaviour
     }
     void Shoot() // ShootEvent's function that fires a bullet from the player's gun
     {
-        _anim.SetTrigger("Shoot");
-        _weapon.Fire();
+        if (_weapon.getActivated())
+        {
+            _anim.SetTrigger("Shoot");
+            _weapon.Fire();
+        }
     }
 
     void FlipSprite() // Sprite changes directions based on player input

@@ -77,6 +77,11 @@ public class LocalGameManager : MonoBehaviour, UIControls.IGeneralUIActions
     {
         if (SurvivalMode.Player1Won() || SurvivalMode.Player2Won())
         {
+            foreach (PlayerInput player in _allPlayers)
+            {
+                Weapon playerWeapon = player.GetComponent<Weapon>();
+                playerWeapon.SetActivated(false);
+            }
             if(_bgmMusic.clip != _victoryMusic)
             {
                 _bgmMusic.clip = _victoryMusic;
