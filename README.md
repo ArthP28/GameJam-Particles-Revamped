@@ -1,0 +1,1 @@
+Originally created for Carthage College Game Jam, now a standalone passion project. Gravbattle is a fighting game where players weave through platforms through anti-gravity and shoot each other with lasers. Last player standing wins.
